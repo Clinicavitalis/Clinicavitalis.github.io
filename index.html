@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vitalis | Clínica Odontológica</title>
+    <style>
+        :root {
+            --primary: #00b0eb; /* Celeste Vitalis */
+            --secondary: #b3d6fe;
+            --dark-blue: #01579B;
+            --bg-color: #f4faff;
+            --white: #ffffff;
+            --text-gray: #455A64;
+            --success: #66BB6A;
+            --error: #EF5350;
+        }
+
+        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background-color: var(--bg-color); color: var(--text-gray); overflow-x: hidden; }
+
+        /* --- NAVEGACIÓN --- */
+        nav { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .logo-img { height: 50px; width: auto; } /* Ajuste para tu logo real */
+        .nav-links a { text-decoration: none; color: var(--text-gray); margin-left: 20px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- HERO --- */
+        .hero { background: linear-gradient(135deg, var(--secondary) 0%, var(--white) 100%); padding: 80px 5%; text-align: center; }
+        .hero h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
+        .btn-whatsapp { background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+
+        /* --- SECCIONES GENERALES --- */
+        section { padding: 60px 5%; }
+        .section-title { text-align: center; color: var(--dark-blue); margin-bottom: 40px; font-size: 2rem; }
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        /* --- SERVICIOS --- */
+        .service-card { background: var(--white); padding: 30px; border-radius: 15px; border-bottom: 4px solid var(--primary); transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .service-card:hover { transform: translateY(-5px); }
+        .service-card h3 { color: var(--primary); margin-top: 0; }
+        .service-card ul { padding-left: 20px; line-height: 1.6; font-size: 0.95rem; }
+
+        /* --- EQUIPO --- */
+        .team-card { background: var(--white); border-radius: 15px; overflow: hidden; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .team-photo { width: 100%; height: 250px; object-fit: cover; background: #eee; } /* Placeholder gris si no hay foto */
+        .team-info { padding: 20px; }
+        .team-name { color: var(--dark-blue); font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+        .team-role { color: var(--primary); font-size: 0.9rem; font-weight: 600; }
+
+        /* --- QUIZ STYLES (Tu código original) --- */
+        #quiz-section { background: #e1f5fe; }
+        .game-container { max-width: 500px; margin: 0 auto; background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,176,235, 0.15); }
+        .option-btn { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 10px; border: 2px solid #b3e5fc; background: #f8fdff; cursor: pointer; text-align: left; transition: 0.2s; }
+        .option-btn.correct { background: #e8f5e9; border-color: var(--success); color: #2e7d32; }
+        .option-btn.wrong { background: #ffebee; border-color: var(--error); color: #c62828; }
+        .hidden { display: none !important; }
+        .btn-primary { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; font-size: 1rem; }
+        input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5fc; border-radius: 8px; box-sizing: border-box; }
+
+        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="img/logo.png" alt="Vitalis Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <div class="brand-name" style="display:none; color: var(--primary); font-weight:bold; font-size:1.5rem;">VITALIS</div>
+        </div>
+        <div class="nav-links">
+            <a href="#servicios">Especialidades</a>
+            <a href="#equipo">Profesionales</a>
+            <a href="#quiz-section">Gana Descuentos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Tu sonrisa en manos expertas</h1>
+        <p>Especialistas de la U. de la Frontera y U. Autónoma unidos para brindarte la mejor atención en Padre las Casas.</p>
+        <a href="https://wa.me/56900000000" class="btn-whatsapp">Agendar Evaluación</a>
+    </header>
+
+    <section id="servicios">
+        <h2 class="section-title">Nuestras Especialidades</h2>
+        <div class="grid-cards">
+            <div class="service-card">
+                <h3>👶 Odontopediatría</h3>
+                <p>Especialista de la U. de la Frontera.</p>
+                <ul>
+                    <li>Manejo experto de pacientes NANEAS.</li>
+                    <li>Diplomado en traumatismo dentoalveolar.</li>
+                    <li><strong>Área de juegos exclusiva.</strong></li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>😁 Ortodoncia</h3>
+                <p>Alineación perfecta para tu sonrisa.</p>
+                <ul>
+                    <li>Ortodoncia tradicional correctiva.</li>
+                    <li>Ortodoncia interceptiva (niños).</li>
+                    <li>Diagnóstico digital avanzado.</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>🔩 Implantología</h3>
+                <p>Especialista Bucomaxilofacial U. Autónoma.</p>
+                <ul>
+                    <li>Implantes unitarios.</li>
+                    <li>Puentes sobre implantes.</li>
+                    <li>Sobredentaduras y prótesis fija.</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>✨ Estética Facial & Oral</h3>
+                <p>Armonización completa del rostro.</p>
+                <ul>
+                    <li>Toxina Botulínica y Rinomodelación.</li>
+                    <li>Estimulación con colágeno.</li>
+                    <li>Carillas de resina y alta estética.</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>implantología Cirugía Bucal</h3>
+                <p>Diplomado en Cirugía y Plástica Periodontal.</p>
+                <ul>
+                    <li>Extracción de terceros molares (Juicio).</li>
+                    <li>Frenectomía y alargamiento coronario.</li>
+                    <li>Recubrimiento de recesiones.</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>⚡ Endodoncia</h3>
+                <p>Especialista U. Autónoma.</p>
+                <ul>
+                    <li>Tratamiento de conducto (todos los dientes).</li>
+                    <li>Tecnología de Endodoncia Mecanizada.</li>
+                    <li>Alivio del dolor dental.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" style="background-color: white;">
+        <h2 class="section-title">Conoce a tus Doctores</h2>
+        <div class="grid-cards">
+            <div class="team-card">
+                <img src="img/dra_michelle.jpg" alt="Dra. Michelle Provost" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dra. Michelle Provost Jaramillo</div>
+                    <div class="team-role">Directora General</div>
+                    <p style="font-size:0.85rem;">Odontóloga General, Estética Facial, Diplomada en Adhesión.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dr_juan.jpg" alt="Dr. Juan Pablo Arroyo" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dr. Juan Pablo Arroyo</div>
+                    <div class="team-role">Director General</div>
+                    <p style="font-size:0.85rem;">Odontólogo General, Diplomado en Cirugía Bucal y Plástica Periodontal.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dra_natalia.jpg" alt="Dra. Natalia Mosoco" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dra. Natalia Mosoco</div>
+                    <div class="team-role">Endodoncia</div>
+                    <p style="font-size:0.85rem;">Especialista en salvar tus dientes y aliviar el dolor.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dr_carlos.jpg" alt="Dr. Carlos Salamanca" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dr. Carlos Salamanca</div>
+                    <div class="team-role">Ortodoncia</div>
+                    <p style="font-size:0.85rem;">Especialista en alinear sonrisas y corregir mordidas.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dra_catalina.jpg" alt="Dra. Catalina Rivera" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dra. Catalina Rivera</div>
+                    <div class="team-role">Odontopediatría</div>
+                    <p style="font-size:0.85rem;">Especialista en el cuidado dental de niños y adolescentes.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dr_robert.jpg" alt="Dr. Robert Guale" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dr. Robert Guale</div>
+                    <div class="team-role">Implantología</div>
+                    <p style="font-size:0.85rem;">Especialista Bucomaxilofacial e implantes dentales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz-section">
+        <h2 class="section-title" style="margin-bottom: 10px;">Reto Vitalis: Master Dental</h2>
+        <p style="text-align:center; margin-bottom: 30px;">¡Juega y gana descuentos exclusivos en tu tratamiento!</p>
+        
+        <div class="game-container">
+            <div id="screen-login">
+                <div style="text-align:center; font-size:3rem;">👋</div>
+                <h3 style="text-align:center; color:var(--primary);">Registro de Jugador</h3>
+                <form onsubmit="handleLogin(event)">
+                    <input type="text" id="input-name" placeholder="Tu Nombre y Apellido" required>
+                    <input type="tel" id="input-phone" placeholder="Teléfono" required>
+                    <button type="submit" class="btn-primary">¡Comenzar Reto!</button>
+                </form>
+            </div>
+
+            <div id="screen-game" class="hidden">
+                <div style="display:flex; justify-content:space-between; color:var(--primary); font-weight:bold; font-size:0.9rem;">
+                    <span id="level-name">Nivel 1</span>
+                    <span id="q-counter">1/5</span>
+                </div>
+                <div id="q-emoji" style="font-size:4rem; text-align:center; margin: 15px 0;"></div>
+                <p id="q-text" style="text-align:center; font-weight:bold; font-size:1.1rem; min-height:60px;"></p>
+                <div id="options-box"></div>
+                <div id="hint-box" class="hidden" style="background:#fff3e0; color:#e65100; padding:10px; border-radius:8px; margin-top:10px; font-size:0.9rem;"></div>
+                <button id="next-btn" class="btn-primary hidden" onclick="nextQuestion()">Siguiente Pregunta ➡️</button>
+            </div>
+
+            <div id="screen-result" class="hidden" style="text-align:center;">
+                <div style="font-size:3rem;">🎉</div>
+                <h2 style="color:var(--primary);">¡Juego Terminado!</h2>
+                <p>Tu puntaje final es:</p>
+                <div id="final-score" style="font-size:3.5rem; font-weight:800; color:var(--dark-blue);">0</div>
+                
+                <div id="coupon-box" class="hidden" style="border:2px dashed #ffa000; background:#fff8e1; padding:15px; margin-top:20px; border-radius:10px;">
+                    <strong style="color:#ff6f00;">🌟 ¡FELICIDADES! 🌟</strong>
+                    <p>Has desbloqueado un descuento especial.</p>
+                    <h3 style="background:white; padding:10px; border:1px solid #ffa000; display:inline-block;">VITALIS2024</h3>
+                    <p style="font-size:0.8rem;">Muestra este código en recepción.</p>
+                </div>
+                <button class="btn-primary" onclick="location.reload()" style="margin-top:20px;">Volver a Jugar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" style="background: var(--dark-blue); color: white; text-align: center;">
+        <h2>Visítanos en Vitalis</h2>
+        <p>Tu clínica dental de confianza en Padre las Casas</p>
+        <br>
+        <a href="https://wa.me/56900000000" class="btn-whatsapp" style="background:white; color:var(--dark-blue);">Hablar por WhatsApp</a>
+        <br><br>
+        <p style="font-size:0.8rem; opacity:0.7;">&copy; 2024 Vitalis Clínica Odontológica. Todos los derechos reservados.</p>
+    </section>
+
+    <script>
+        // --- BASE DE DATOS DE PREGUNTAS (Tus preguntas originales + estructura) ---
+        const levelsData = [
+            { 
+                id: 1, name: "Nivel 1: Anatomía Básica", count: 6, qs: [
+                    {e:"🛡️", t:"¿Cuál es la capa más externa y dura del diente?", o:["El Esmalte","La Dentina","La Pulpa","La Encía"], a:0, h:"Es la parte blanca y brillante."},
+                    {e:"👶", t:"¿Cuántos dientes de leche tiene un niño?", o:["32 dientes","20 dientes","10 dientes","50 dientes"], a:1, h:"Son 10 arriba y 10 abajo."},
+                    {e:"⚡", t:"¿Qué hay justo en el centro del diente?", o:["Hueso","Aire","Pulpa (Nervio)","Agua"], a:2, h:"Es la parte viva que siente el frío y el calor."}
+                ]
+            },
+            { 
+                id: 2, name: "Nivel 2: Higiene Vitalis", count: 3, qs: [
+                    {e:"🪥", t:"¿Cuántas veces al día recomienda Vitalis cepillarse?", o:["1 vez","2 veces mínimo","Solo los domingos"], a:1, h:"Una por la mañana y otra antes de dormir."},
+                    {e:"🧵", t:"¿Qué herramienta limpia ENTRE los dientes?", o:["Cepillo","Hilo Dental","Enjuague"], a:1, h:"Entra donde el cepillo no llega."},
+                    {e:"📅", t:"¿Cada cuánto cambiar tu cepillo?", o:["Cada 3 meses","Cada año","Nunca"], a:0, h:"O antes si las cerdas están abiertas."}
+                ]
+            }
+            // Puedes agregar más niveles aquí copiando la estructura
+        ];
+
+        let state = { score: 0, currentLevel: 0, currentQ: 0, user: "" };
+
+        function handleLogin(e) {
+            e.preventDefault();
+            state.user = document.getElementById('input-name').value;
+            if(state.user) {
+                document.getElementById('screen-login').classList.add('hidden');
+                document.getElementById('screen-game').classList.remove('hidden');
+                loadQuestion();
+            }
+        }
+
+        function loadQuestion() {
+            const level = levelsData[state.currentLevel];
+            const q = level.qs[state.currentQ];
+
+            document.getElementById('level-name').innerText = level.name;
+            document.getElementById('q-counter').innerText = (state.currentQ + 1) + "/" + level.qs.length;
+            document.getElementById('q-emoji').innerText = q.e;
+            document.getElementById('q-text').innerText = q.t;
+            document.getElementById('hint-box').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+
+            const box = document.getElementById('options-box');
+            box.innerHTML = ""; // Limpiar botones anteriores
+
+            q.o.forEach((opcion, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opcion;
+                btn.onclick = () => checkAnswer(index, q.a, btn, q.h);
+                box.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selected, correct, btnElement, hint) {
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.disabled = true); // Bloquear botones
+
+            if(selected === correct) {
+                btnElement.classList.add('correct');
+                state.score += 100;
+                document.getElementById('next-btn').classList.remove('hidden');
+            } else {
+                btnElement.classList.add('wrong');
+                const hintBox = document.getElementById('hint-box');
+                hintBox.innerText = "💡 Pista: " + hint;
+                hintBox.classList.remove('hidden');
+                // Mostrar botón siguiente aunque falle para que el juego continúe
+                setTimeout(() => document.getElementById('next-btn').classList.remove('hidden'), 1000);
+            }
+        }
+
+        function nextQuestion() {
+            const level = levelsData[state.currentLevel];
+            state.currentQ++;
+
+            if(state.currentQ < level.qs.length) {
+                loadQuestion();
+            } else {
+                // Fin del nivel, pasar al siguiente o terminar
+                if(state.currentLevel < levelsData.length - 1) {
+                    state.currentLevel++;
+                    state.currentQ = 0;
+                    alert("¡Nivel Completado! Pasando al siguiente nivel...");
+                    loadQuestion();
+                } else {
+                    finishGame();
+                }
+            }
+        }
+
+        function finishGame() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+            document.getElementById('final-score').innerText = state.score;
+            
+            // Si tiene buen puntaje, mostrar cupón
+            if(state.score > 300) {
+                document.getElementById('coupon-box').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
