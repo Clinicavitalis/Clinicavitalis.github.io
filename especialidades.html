@@ -96,6 +96,29 @@
     <section id="contacto-footer" style="background: var(--dark-blue); color: white; text-align: center;">
         <p>&copy; 2022 Vitalis Clínica Odontológica.</p>
     </section>
-
+ <script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu-links');
+        // Esto pone o quita la clase "active" que definimos en el CSS
+        if (menu.style.display === "flex") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "flex";
+        }
+    }
+</script>
+    
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-links');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+                menu.style.flexDirection = "column"; /* Asegura que se vea vertical en móvil */
+            }
+        }
+    </script>
+    
 </body>
 </html>
