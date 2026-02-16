@@ -53,3 +53,44 @@
         input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5fc; border-radius: 8px; box-sizing: border-box; }
 
         @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } }
+/* Agrega esto en tu <style> antes del cierre </style> */
+
+/* Estilo del botón de 3 líneas (oculto en PC, visible en móvil) */
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+/* Ajustes para Móvil */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Oculto por defecto */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; /* Justo debajo de la barra blanca */
+        left: 0;
+        background-color: var(--white);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex; /* Se muestra al activar */
+    }
+
+    .nav-links a {
+        margin: 15px 0;
+        display: block;
+        font-size: 1.2rem;
+    }
+
+    .hamburger {
+        display: block; /* Mostrar las 3 líneas */
+    }
+
+    .hero h1 { font-size: 2rem; }
+}
