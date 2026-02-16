@@ -32,6 +32,100 @@
         <a href="https://wa.me/56957006747" class="btn-whatsapp">Agendar Evaluación</a>
     </header>
 
+<section id="quienes-somos" style="background-color: #f8fbff; padding: 80px 5%;">
+    
+    <style>
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1; /* Ocupa la mitad */
+        }
+
+        .about-image {
+            flex: 1; /* Ocupa la otra mitad */
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 176, 235, 0.15); /* Sombra azul suave */
+            border: 4px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02); /* Efecto zoom suave al pasar el mouse */
+        }
+
+        .highlight-text {
+            color: var(--primary); /* Tu azul Vitalis */
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #01579B; /* Azul oscuro para lectura */
+            margin-top: 0;
+            line-height: 1.2;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive para celular */
+        @media (max-width: 768px) {
+            .about-container {
+                flex-direction: column; /* Uno debajo del otro */
+                text-align: center;
+            }
+            .about-text h2 { font-size: 2rem; }
+        }
+    </style>
+
+    <div class="about-container">
+        
+        <div class="about-text">
+            <span class="highlight-text">Nuestra Historia</span>
+            <h2>Más que una clínica,<br>somos tu familia dental.</h2>
+            
+            <p>
+                En <strong>Vitalis Clínica Odontológica</strong>, creemos que una visita al dentista debería ser una experiencia tranquila y positiva. Ubicados en el corazón de Malalhue, nacimos con una misión clara: acercar la odontología de especialidad a nuestra comunidad, sin que tengas que viajar lejos.
+            </p>
+            
+            <p>
+                Somos un equipo apasionado de profesionales, unidos por la vocación de servicio. Desde el primer diente de leche hasta la rehabilitación de nuestros adultos mayores, combinamos tecnología moderna con ese trato humano y cercano que nos caracteriza.
+            </p>
+
+            <p style="color: #00b0eb; font-weight: bold;">
+                ✨ En Vitalis, no atendemos pacientes, cuidamos personas.
+            </p>
+
+            <a href="#contacto" class="btn-primary" style="display: inline-block; margin-top: 10px; text-decoration: none; color: white; background: #00b0eb; padding: 12px 30px; border-radius: 50px;">Conocer al Equipo</a>
+        </div>
+
+        <div class="about-image">
+            <img src="img/equipo.jpg" alt="Equipo de profesionales Vitalis sonriendo">
+        </div>
+
+    </div>
+</section>
+    
      <section id="contacto-footer" style="background: var(--dark-blue); color: white; text-align: center;">
         <p>&copy; 2022 Vitalis Clínica Odontológica.</p>
     </section>
