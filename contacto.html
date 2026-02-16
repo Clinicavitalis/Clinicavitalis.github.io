@@ -168,6 +168,18 @@
         <p>&copy; 2022 Vitalis Clínica Odontológica.</p>
     </footer>
 
+     <script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu-links');
+        // Esto pone o quita la clase "active" que definimos en el CSS
+        if (menu.style.display === "flex") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "flex";
+        }
+    }
+</script>
+    
     <script>
         function toggleMenu() {
             const menu = document.getElementById('menu-links');
@@ -183,5 +195,6 @@
 </body>
 
 </html>
+
 
 
