@@ -8,18 +8,23 @@
        <link rel="stylesheet" href="style.css">>
 <body>
 
-    <nav>
-        <div class="logo-container">
-            <img src="img/logo.jpg" alt="Vitalis Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-            <div class="brand-name" style="display:none; color: var(--primary); font-weight:bold; font-size:1.5rem;">VITALIS</div>
-        </div>
-        <div class="nav-links">
-            <a href="index.html">Inicio</a>
-            <a href="especialidades.html">Especialidades</a>
-            <a href="equipo.html" class="active">Equipo</a> <a href="juego.html">Gana Descuentos</a>
-            <a href="contacto.html">Contacto</a>
-        </div>
-    </nav>
+   <nav>
+    <div class="logo-container">
+        <img src="img/logo.png" alt="Vitalis" class="logo-img" style="height: 50px;">
+    </div>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+        ☰
+    </div>
+
+    <div class="nav-links" id="menu-links">
+        <a href="index.html">Inicio</a>
+        <a href="especialidades.html">Especialidades</a>
+        <a href="equipo.html">Equipo</a>
+        <a href="juego.html">Jugar</a>
+        <a href="https://wa.me/56900000000">Contacto</a>
+    </div>
+</nav>
 
     <header class="hero">
         <h1>Tu sonrisa en manos expertas</h1>
