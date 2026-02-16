@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vitalis | Clínica Odontológica</title>
+    <link rel="stylesheet" href="style.css">>
+
+</head>
+<body>
+
+    <nav>
+    <div class="logo-container">
+        <img src="img/logo.png" alt="Vitalis" class="logo-img" style="height: 50px;">
+    </div>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+        ☰
+    </div>
+
+    <div class="nav-links" id="menu-links">
+        <a href="index.html">Inicio</a>
+        <a href="especialidades.html">Especialidades</a>
+        <a href="equipo.html">Equipo</a>
+        <a href="juego.html">Jugar</a>
+        <a href="https://wa.me/56900000000">Contacto</a>
+    </div>
+</nav>
+
+    <header class="hero">
+        <h1>Tu sonrisa en manos expertas</h1>
+        <p>Gabriela Mistral 79, Malalhue</p>
+        <a href="https://wa.me/56957006747" class="btn-whatsapp">Agendar Evaluación</a>
+    </header>
+
+   <section id="equipo" style="background-color: white;">
+        <h2 class="section-title">Conoce a tus Doctores</h2>
+        <div class="grid-cards">
+            <div class="team-card">
+                <img src="img/dra_michelle.jpg" alt="Dra. Michelle Provost" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dra. Michelle Provost Jaramillo</div>
+                    <div class="team-role">Directora General</div>
+                    <p style="font-size:0.85rem;">Odontóloga General, Estética Facial, Diplomada en Adhesión.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dr_juan.jpg" alt="Dr. Juan Pablo Arroyo" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dr. Juan Pablo Arroyo</div>
+                    <div class="team-role">Director General</div>
+                    <p style="font-size:0.85rem;">Odontólogo General, Diplomado en Cirugía Bucal y Plástica Periodontal.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dra_natalia.jpg" alt="Dra. Natalia Mosoco" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dra. Natalia Mosoco</div>
+                    <div class="team-role">Endodoncia</div>
+                    <p style="font-size:0.85rem;">Especialista en salvar tus dientes y aliviar el dolor.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dr_carlos.jpg" alt="Dr. Carlos Salamanca" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dr. Carlos Salamanca</div>
+                    <div class="team-role">Ortodoncia</div>
+                    <p style="font-size:0.85rem;">Especialista en alinear sonrisas y corregir mordidas.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dra_catalina.jpg" alt="Dra. Catalina Rivera" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dra. Catalina Rivera</div>
+                    <div class="team-role">Odontopediatría</div>
+                    <p style="font-size:0.85rem;">Especialista en el cuidado dental de niños y adolescentes.</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <img src="img/dr_robert.jpg" alt="Dr. Robert Guale" class="team-photo">
+                <div class="team-info">
+                    <div class="team-name">Dr. Robert Guale</div>
+                    <div class="team-role">Implantología</div>
+                    <p style="font-size:0.85rem;">Especialista Bucomaxilofacial e implantes dentales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto-footer" style="background: var(--dark-blue); color: white; text-align: center;">
+        <p>&copy; 2022 Vitalis Clínica Odontológica.</p>
+    </section>
+
+    <script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu-links');
+        // Esto pone o quita la clase "active" que definimos en el CSS
+        if (menu.style.display === "flex") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "flex";
+        }
+    }
+</script>
+</body>
+</html>
+
+</body>
+</html>
