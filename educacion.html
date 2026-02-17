@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vitalis | Clínica Odontológica</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <nav>
+    <div class="logo-container">
+    <a href="index.html">
+        <img src="img/logo.jpg" alt="Vitalis" class="logo-img" style="height: 50px;">
+    </a>
+</div>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+        ☰
+    </div>
+
+    <div class="nav-links" id="menu-links">
+        <a href="index.html">Inicio</a>
+        <a href="especialidades.html">Especialidades</a>
+        <a href="equipo.html">Equipo</a>
+        <a href="educacion.html">Informacion educativa</a>
+        <a href="juego.html">Jugar</a>
+        <a href="contacto.html">Contacto</a>
+    </div>
+</nav>
+
+    <header class="hero">
+        <h1>Tu sonrisa en manos expertas</h1>
+        <p>Gabriela Mistral 79, Malalhue</p>
+        <a href="https://wa.me/56957006747" class="btn-whatsapp">Agendar Evaluación</a>
+    </header>
+
+   <section id="educacion" style="padding: 60px 5%; background-color: #f9f9f9;">
+    
+    <div style="text-align: center; margin-bottom: 50px;">
+        <h2 class="section-title">Aula Vitalis: Aprende y Sonríe</h2>
+        <p style="max-width: 700px; margin: 0 auto; color: #555;">
+            En Vitalis no solo curamos dientes, educamos pacientes. Descubre las últimas novedades de la clínica, consejos de salud y videos explicativos para cuidar tu sonrisa en casa.
+        </p>
+    </div>
+
+    <h3 style="color: var(--primary); border-left: 5px solid var(--dark-blue); padding-left: 15px; margin-bottom: 30px;">
+        📺 Videos Educativos
+    </h3>
+    
+    <div class="video-grid">
+        <div class="video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Técnica de Cepillado" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h4>¿Te cepillas bien los dientes?</h4>
+                <p>La Dra. Catalina nos enseña la técnica de Bass modificada en 2 minutos.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Mitos del Flúor" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h4>Mitos sobre el Flúor</h4>
+                <p>Descubre por qué es el mejor aliado para prevenir las caries en niños.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Implantes Dentales" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h4>¿Cómo funciona un Implante?</h4>
+                <p>El Dr. Robert explica el proceso paso a paso sin dolor.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #ddd; margin: 60px 0;">
+
+    <h3 style="color: var(--primary); border-left: 5px solid var(--dark-blue); padding-left: 15px; margin-bottom: 30px;">
+        📰 Noticias y Consejos Vitalis
+    </h3>
+
+    <div class="news-grid">
+        <article class="news-card">
+            <div class="news-image" style="background-image: url('img/dra_michelle.jpg');"></div> <div class="news-content">
+                <span class="news-tag">Novedad</span>
+                <h4>Nueva Tecnología en Vitalis</h4>
+                <p>Incorporamos escáner intraoral 3D. ¡Dile adiós a las pastas de impresión incómodas!</p>
+                <a href="#" class="read-more">Leer más &rarr;</a>
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-image" style="background-color: #b3d6fe;">
+                <span style="font-size:3rem;">🍎</span>
+            </div>
+            <div class="news-content">
+                <span class="news-tag">Salud Oral</span>
+                <h4>Alimentos amigos de tus dientes</h4>
+                <p>No todo es dejar el azúcar. Conoce qué alimentos ayudan a limpiar tu esmalte naturalmente.</p>
+                <a href="#" class="read-more">Leer más &rarr;</a>
+            </div>
+        </article>
+
+        <article class="news-card">
+            <div class="news-image" style="background-color: #b3d6fe;">
+                <span style="font-size:3rem;">👶</span>
+            </div>
+            <div class="news-content">
+                <span class="news-tag">Odontopediatría</span>
+                <h4>¿Cuándo la primera visita?</h4>
+                <p>La Dra. Catalina recomienda traer a tu bebé al aparecer el primer diente. Te contamos por qué.</p>
+                <a href="#" class="read-more">Leer más &rarr;</a>
+            </div>
+        </article>
+    </div>
+
+</section>
+
+    <script>
+    function toggleMenu() {
+        const menu = document.getElementById('menu-links');
+        // Esto pone o quita la clase "active" que definimos en el CSS
+        if (menu.style.display === "flex") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "flex";
+        }
+    }
+</script>
+</body>
+</html>
+
+</body>
+</html>
