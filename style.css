@@ -94,3 +94,16 @@
 
     .hero h1 { font-size: 2rem; }
 }
+
+/* --- AGREGADO PARA INSTAGRAM --- */
+
+/* Wrapper especial para videos verticales (Reels/TikTok) */
+.video-wrapper.vertical {
+    padding-bottom: 177.77%; /* Relación de aspecto 9:16 (Altura de un celular) */
+}
+
+/* Opcional: Para que el botón de play de Instagram no se corte */
+.instagram-media {
+    min-width: 100% !important;
+    margin: 0 !important;
+}
