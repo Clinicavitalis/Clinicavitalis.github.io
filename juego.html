@@ -35,389 +35,374 @@
         <a href="https://wa.me/56957006747" class="btn-whatsapp">Agendar Evaluación</a>
     </header>
 
-    <section id="vitalis-game-widget">
+<section id="vitalis-game-widget">
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
     <style>
-        /* Estilos encapsulados para el Widget de Vitalis */
+        /* ESTILOS DEL WIDGET (Aislados) */
         #vitalis-game-widget {
-            /* Variables Locales */
-            --v-bg: #EBF5FB;
-            --v-primary: #29B6F6;
-            --v-dark: #01579B;
-            --v-white: #FFFFFF;
-            --v-success: #66BB6A;
-            --v-error: #EF5350;
-            --v-gray: #455A64;
-            
+            --v-bg: #EBF5FB; --v-primary: #29B6F6; --v-dark: #01579B;
+            --v-white: #FFFFFF; --v-success: #66BB6A; --v-error: #EF5350;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--v-bg);
-            color: var(--v-dark);
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 500px; /* Ancho máximo del juego */
-            margin: 0 auto;   /* Centrado */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
+            background-color: var(--v-bg); color: var(--v-dark);
+            border-radius: 20px; padding: 20px; max-width: 500px; margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: relative;
         }
-
-        /* Reset básico solo para el widget */
-        #vitalis-game-widget * {
-            box-sizing: border-box;
-        }
-
-        /* Header Interno del Juego */
-        .v-header-bar {
-            background: linear-gradient(135deg, #ffffff 0%, #E1F5FE 100%);
-            padding: 10px 15px;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-
-        .v-logo-area { display: flex; align-items: center; gap: 10px; }
-        .v-logo-circle {
-            width: 35px; height: 35px; background: var(--v-white);
-            border-radius: 50%; border: 2px solid var(--v-primary);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px; font-weight: bold; color: var(--v-primary);
-        }
-        .v-brand-title { font-size: 1rem; font-weight: 800; color: var(--v-dark); line-height: 1; }
-        .v-brand-sub { font-size: 0.7rem; opacity: 0.8; }
-
-        /* Tarjetas y Estructura */
-        .v-card {
-            background: var(--v-white);
-            padding: 25px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(41, 182, 246, 0.15);
-            text-align: center;
-            animation: v-fadeIn 0.4s ease-out;
-        }
-
+        #vitalis-game-widget * { box-sizing: border-box; }
         .v-hidden { display: none !important; }
 
-        /* Formularios */
-        .v-form-group { margin-bottom: 15px; text-align: left; }
-        .v-form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--v-gray); font-weight: 600; }
-        .v-input {
-            width: 100%; padding: 12px; border: 2px solid #B3E5FC;
-            border-radius: 10px; font-size: 1rem; outline: none; transition: 0.3s;
-            background: #fff; color: #333;
+        /* HEADER */
+        .v-header {
+            background: linear-gradient(135deg, #ffffff 0%, #E1F5FE 100%);
+            padding: 10px 15px; border-radius: 15px; display: flex;
+            justify-content: space-between; align-items: center; margin-bottom: 20px;
         }
-        .v-input:focus { border-color: var(--v-primary); }
+        .v-logo {
+            width: 45px; height: 45px; border-radius: 50%; 
+            border: 2px solid var(--v-primary); overflow: hidden; background: white;
+        }
+        .v-logo img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* Botones */
-        .v-btn {
-            border: none; padding: 12px 25px; border-radius: 50px;
-            font-size: 1rem; font-weight: bold; width: 100%; cursor: pointer;
-            margin-top: 10px; transition: transform 0.2s;
-        }
-        .v-btn:active { transform: scale(0.98); }
+        /* PANTALLAS */
+        .v-screen { background: var(--v-white); padding: 20px; border-radius: 20px; text-align: center; animation: vFade 0.4s; }
+        @keyframes vFade { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+
+        /* UI ELEMENTS */
+        .v-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #B3E5FC; border-radius: 10px; font-size: 1rem;}
+        .v-btn { border: none; padding: 12px; border-radius: 50px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 1rem; }
         .v-btn-primary { background: var(--v-primary); color: white; box-shadow: 0 4px 10px rgba(41, 182, 246, 0.4); }
         .v-btn-secondary { background: transparent; color: var(--v-primary); border: 2px solid var(--v-primary); }
-
-        /* Elementos del Juego */
-        .v-emoji-header { font-size: 3.5rem; display: block; margin-bottom: 10px; }
-        .v-progress-track { background: #ECEFF1; height: 8px; border-radius: 4px; margin-bottom: 20px; width: 100%; overflow: hidden; }
+        
+        /* JUEGO */
+        .v-opt-btn { width: 100%; padding: 15px; margin-bottom: 8px; border-radius: 10px; border: 2px solid #eee; background: white; cursor: pointer; text-align: left; font-size: 0.95rem; transition: 0.2s; }
+        .v-opt-btn:hover { background: #f9f9f9; }
+        .v-correct { background: #E8F5E9 !important; border-color: #66BB6A !important; color: #2E7D32; }
+        .v-wrong { background: #FFEBEE !important; border-color: #EF5350 !important; color: #C62828; }
+        
+        .v-progress-track { background: #ECEFF1; height: 8px; border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
         .v-progress-fill { background: var(--v-primary); height: 100%; width: 0%; transition: width 0.3s; }
-        
-        .v-option-btn {
-            background: var(--v-bg); border: 2px solid transparent;
-            padding: 15px; border-radius: 12px; font-size: 0.95rem;
-            color: var(--v-dark); font-weight: 500; cursor: pointer;
-            width: 100%; margin-bottom: 10px; text-align: left; transition: all 0.2s;
-        }
-        .v-option-btn.v-correct { background: #E8F5E9; border-color: var(--v-success); color: #2E7D32; }
-        .v-option-btn.v-wrong { background: #FFEBEE; border-color: var(--v-error); color: #C62828; opacity: 0.6; }
 
-        .v-hint-box { background: #FFF3E0; border: 1px solid #FFCC80; color: #E65100; padding: 15px; border-radius: 10px; margin-top: 15px; display: none; text-align: left; font-size: 0.9rem; }
+        .v-level-item { padding: 15px; border-radius: 10px; background: white; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--v-primary); cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .v-locked { opacity: 0.6; background: #f0f0f0; border-color: #ccc; pointer-events: none; }
 
-        /* Niveles y Ranking */
-        .v-level-card {
-            background: var(--v-white); padding: 15px; border-radius: 15px;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 10px;
-            border-left: 5px solid var(--v-primary); cursor: pointer;
-        }
-        .v-level-card.v-locked { background: #ECEFF1; border-color: var(--v-gray); opacity: 0.7; pointer-events: none; }
-        
-        .v-ranking-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
-        .v-ranking-table th { text-align: left; padding: 8px; color: var(--v-primary); border-bottom: 2px solid #E1F5FE; }
-        .v-ranking-table td { padding: 10px 8px; border-bottom: 1px solid #f0f0f0; }
-        .v-user-row { background-color: #E1F5FE; font-weight: bold; }
-
-        @keyframes v-fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* TABLA */
+        .v-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
+        .v-table th { text-align: left; color: var(--v-primary); border-bottom: 2px solid #eee; padding: 5px;}
+        .v-table td { padding: 8px 5px; border-bottom: 1px solid #f5f5f5; }
+        .v-user-row { background: #E1F5FE; font-weight: bold; }
     </style>
 
-    <div class="v-header-bar">
-        <div class="v-logo-circle" style="overflow: hidden; padding: 0;">
-    <img src="img/logo.jpg" alt="Logo Vitalis" style="width: 100%; height: 100%; object-fit: cover;">
-</div>
-                <div class="v-brand-title">Vitalis</div>
-                <div class="v-brand-sub">Clínica Odontológica</div>
+    <div class="v-header">
+        <div style="display:flex; gap:10px; align-items:center;">
+            <div class="v-logo">
+                <img src="img/logo.jpg" alt="Vitalis">
+            </div>
+            <div style="text-align:left;">
+                <div style="font-weight:800; line-height:1; font-size: 1.1rem;">Vitalis</div>
+                <div style="font-size:0.75rem; color:#666;">Clínica Odontológica</div>
             </div>
         </div>
-        <div id="v-score-display" class="v-hidden" style="font-size: 0.9rem; font-weight: bold; color: var(--v-primary);">
-            <span id="v-current-points">0</span> pts
-        </div>
+        <div id="v-score-ui" class="v-hidden" style="color:var(--v-primary); font-weight:bold;">0 pts</div>
     </div>
 
-    <div id="v-game-content">
-
-        <div id="v-screen-login" class="v-card">
-            <span class="v-emoji-header">👋</span>
-            <h3 style="margin-top:0; color:var(--v-primary);">¡Bienvenido!</h3>
-            <p style="font-size:0.9rem; margin-bottom:20px;">Aprende sobre tu sonrisa y gana premios.</p>
-            <form onsubmit="vGame.handleLogin(event)">
-                <div class="v-form-group">
-                    <label>Nombre</label>
-                    <input type="text" id="v-input-name" class="v-input" placeholder="Ej: Sofía" required>
-                </div>
-                <div class="v-form-group">
-                    <label>Teléfono</label>
-                    <input type="tel" id="v-input-phone" class="v-input" placeholder="987654321" required>
-                </div>
-                <div class="v-form-group">
-                    <label>Correo</label>
-                    <input type="email" id="v-input-email" class="v-input" placeholder="mama@gmail.com" required>
-                </div>
-                <button type="submit" class="v-btn v-btn-primary">Jugar</button>
-                <button type="button" class="v-btn v-btn-secondary" onclick="vGame.showRanking()">Ver Ranking</button>
+    <div id="v-app-container">
+        
+        <div id="v-scr-login" class="v-screen">
+            <div style="font-size:3rem;">👋</div>
+            <h2 style="color:var(--v-primary); margin-top:0;">¡Bienvenido!</h2>
+            <p style="font-size:0.9rem; color:#555;">Demuestra cuánto sabes y gana premios.</p>
+            <form onsubmit="vGame.login(event)">
+                <input id="v-in-name" class="v-input" placeholder="Nombre del Paciente" required>
+                <input id="v-in-phone" type="tel" class="v-input" placeholder="Teléfono (para guardar récord)" required>
+                <button type="submit" class="v-btn v-btn-primary">Comenzar Aventura</button>
+                <button type="button" class="v-btn v-btn-secondary" onclick="vGame.showRanking()">Ver Ranking Semanal</button>
             </form>
         </div>
 
-        <div id="v-screen-menu" class="v-card v-hidden">
-            <div style="display:flex; gap:10px; margin-bottom:20px; align-items:center;">
+        <div id="v-scr-menu" class="v-screen v-hidden">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
                 <div style="font-size:2.5rem;">🦷</div>
                 <div style="text-align:left;">
-                    <div style="font-size:0.8rem; color:#666;">Hola, <b id="v-player-name"></b></div>
-                    <div style="font-weight:bold; font-size:0.9rem; line-height:1.2;">¡Completa los niveles!</div>
+                    <div style="font-size:0.8rem; color:#666;">Hola, <b id="v-lbl-name"></b></div>
+                    <div style="font-weight:bold; font-size:0.9rem;">¡Completa los 5 niveles!</div>
                 </div>
             </div>
             <div id="v-levels-list"></div>
             <button class="v-btn v-btn-secondary" onclick="vGame.showRanking()">Ver Ranking</button>
         </div>
 
-        <div id="v-screen-game" class="v-card v-hidden">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:0.8rem; color:#999;">
-                <span id="v-lvl-name">Nivel 1</span>
-                <span id="v-q-counter">1/5</span>
+        <div id="v-scr-game" class="v-screen v-hidden">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#888; margin-bottom:10px;">
+                <span id="v-lbl-lvlname">Nivel 1</span>
+                <span id="v-lbl-counter">1/6</span>
             </div>
-            <div class="v-progress-track"><div id="v-progress-bar" class="v-progress-fill"></div></div>
+            <div class="v-progress-track"><div id="v-bar" class="v-progress-fill"></div></div>
             
-            <span id="v-q-emoji" style="font-size:3rem; display:block; margin-bottom:10px;">🤔</span>
-            <p id="v-q-text" style="font-weight:600; font-size:1.1rem; margin-bottom:20px;">Pregunta...</p>
+            <div id="v-lbl-emoji" style="font-size:3.5rem; margin-bottom:10px;">🤔</div>
+            <p id="v-lbl-text" style="font-weight:600; font-size:1.1rem; margin-bottom:20px;">Pregunta...</p>
             
             <div id="v-options-box"></div>
             
-            <div id="v-hint-box" class="v-hint-box">💡 <span id="v-hint-text"></span></div>
-            <button id="v-next-btn" class="v-btn v-btn-primary v-hidden" onclick="vGame.nextQuestion()">Siguiente</button>
-        </div>
-
-        <div id="v-screen-blocked" class="v-card v-hidden">
-            <span class="v-emoji-header">⏳</span>
-            <h3>¡Ya jugaste!</h3>
-            <p>Solo puedes registrar un puntaje por semana. ¡Vuelve el lunes!</p>
-            <button class="v-btn v-btn-secondary" onclick="vGame.showRanking()">Ver Tabla</button>
-        </div>
-
-        <div id="v-screen-result" class="v-card v-hidden">
-            <span class="v-emoji-header">🎉</span>
-            <h3 style="color:var(--v-primary);">¡Terminado!</h3>
-            <div style="font-size:3rem; font-weight:800; color:var(--v-dark);" id="v-final-score">0</div>
-            <p>Puntos Totales</p>
-            
-            <div id="v-coupon" class="v-hidden" style="background:#FFF8E1; border:2px dashed #FFCA28; padding:10px; border-radius:10px; margin:15px 0;">
-                <b style="color:#FF6F00;">¡GANASTE!</b><br>
-                Usa el código: <b style="font-size:1.2rem;">DIENTE20</b>
+            <div id="v-hint-box" style="display:none; background:#FFF3E0; border:1px solid #FFCC80; padding:10px; border-radius:10px; margin-top:15px; font-size:0.9rem; text-align:left; color:#E65100;">
+                💡 <b>Pista:</b> <span id="v-lbl-hint"></span>
             </div>
-            
-            <button class="v-btn v-btn-primary" onclick="vGame.showRanking()">Ver Ranking</button>
+
+            <button id="v-btn-next" class="v-btn v-btn-primary v-hidden" onclick="vGame.next()">Siguiente Pregunta</button>
         </div>
 
-        <div id="v-screen-ranking" class="v-card v-hidden">
+        <div id="v-scr-blocked" class="v-screen v-hidden">
+            <div style="font-size:3rem;">⏳</div>
+            <h3>¡Ya jugaste esta semana!</h3>
+            <p>Solo puedes registrar un puntaje por semana. ¡Vuelve el lunes para intentar superar tu récord!</p>
+            <button class="v-btn v-btn-secondary" onclick="vGame.showRanking()">Ver Ranking</button>
+        </div>
+
+        <div id="v-scr-result" class="v-screen v-hidden">
+            <div style="font-size:3rem;">🎉</div>
+            <h2 style="color:var(--v-primary);">¡Misión Cumplida!</h2>
+            <div id="v-final-score" style="font-size:3.5rem; font-weight:800; color:var(--v-dark);">0</div>
+            <p>Puntos Totales</p>
+
+            <div id="v-coupon" class="v-hidden" style="background:#FFF8E1; border:2px dashed #FFCA28; padding:15px; border-radius:10px; margin:20px 0;">
+                <strong style="color:#FF6F00;">🌟 ¡PREMIO DESBLOQUEADO!</strong><br>
+                Muestra este código en recepción:<br>
+                <span style="font-size:1.5rem; letter-spacing:2px; font-weight:bold; background:white; padding:5px 10px; display:inline-block; margin-top:5px; border:1px solid #FFCA28;">DIENTE20</span>
+            </div>
+
+            <button class="v-btn v-btn-primary" onclick="vGame.showRanking()">Ver mi Ranking</button>
+        </div>
+
+        <div id="v-scr-ranking" class="v-screen v-hidden">
             <h3 style="color:var(--v-primary); margin-top:0;">🏆 Ranking Semanal</h3>
-            <table class="v-ranking-table">
-                <thead><tr><th>#</th><th>Nombre</th><th style="text-align:right;">Pts</th></tr></thead>
-                <tbody id="v-ranking-body"></tbody>
+            <table class="v-table">
+                <thead><tr><th>#</th><th>Paciente</th><th style="text-align:right;">Pts</th></tr></thead>
+                <tbody id="v-rank-body"><tr><td colspan="3">Cargando...</td></tr></tbody>
             </table>
             <br>
-            <button class="v-btn v-btn-secondary" onclick="location.reload()">Volver</button>
+            <button class="v-btn v-btn-secondary" onclick="location.reload()">Volver al Inicio</button>
         </div>
 
     </div>
 
     <script>
-        // Encapsulamos toda la lógica en un objeto para no chocar con tu página
+        // ======================================================
+        // 1. CONFIGURACIÓN DE FIREBASE (¡RELLENA ESTO!)
+        // ======================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyD9iJbkJaiTPPxw2eJNKlqVIlZhGuz5nHo",
+            authDomain: "vitalis-juego.firebaseapp.com",
+            projectId: "vitalis-juego",
+            storageBucket: "vitalis-juego.firebasestorage.app",
+            messagingSenderId: "462223136582",
+            appId: "1:462223136582:web:f7ebb98f36833478aa3747"
+        };
+        // ======================================================
+
+        // Inicializar Firebase
+        try {
+            firebase.initializeApp(firebaseConfig);
+            var db = firebase.firestore();
+            console.log("Firebase conectado correctamente");
+        } catch(e) {
+            console.error("Error conectando Firebase. Revisa la config.", e);
+        }
+
         const vGame = (function() {
             
-            // --- DATOS DEL JUEGO ---
-            const levels = [
-                { id: 1, name: "Nivel 1: Anatomía", count: 6, qs: [
-                    {e:"🛡️", t:"¿Cuál es la capa más externa y dura del diente?", o:["El Esmalte","La Dentina","La Pulpa","La Encía"], a:0, h:"Parte blanca y brillante."},
-                    {e:"👶", t:"¿Cuántos dientes de leche tiene un niño?", o:["32","20","10","50"], a:1, h:"10 arriba y 10 abajo."},
-                    {e:"⚓", t:"¿Qué parte mantiene el diente pegado al hueso?", o:["Corona","Esmalte","Raíz","Lengua"], a:2, h:"Está bajo la encía."},
-                    {e:"💗", t:"¿Cómo se llama la parte rosada?", o:["Labio","Mejilla","Encía","Paladar"], a:2, h:"Es suave y rosa."},
-                    {e:"⚡", t:"¿Qué hay en el centro del diente?", o:["Hueso","Aire","Pulpa (Nervio)","Agua"], a:2, h:"Siente frío y calor."},
-                    {e:"🧛", t:"¿Qué dientes desgarran la comida?", o:["Molares","Incisivos","Caninos","Premolares"], a:2, h:"Los colmillos."}
-                ]},
-                { id: 2, name: "Nivel 2: Higiene", count: 7, qs: [
-                    {e:"🪥", t:"¿Cuántas veces debes cepillarte al día?", o:["1","2 (Min)","5","Domingos"], a:1, h:"Mañana y noche."},
-                    {e:"🧵", t:"¿Para limpiar ENTRE dientes?", o:["Cepillo","Enjuague","Hilo Dental","Palillos"], a:2, h:"Hilo muy fino."},
-                    {e:"🦠", t:"¿Qué comen las bacterias?", o:["Agua","Azúcar","Verduras","Aire"], a:1, h:"Aman los dulces."},
-                    {e:"📅", t:"¿Cuándo cambiar cepillo?", o:["3 meses","1 año","Nunca","1 semana"], a:0, h:"Cuando cerdas se abren."},
-                    {e:"🦷", t:"¿Mineral que fortalece el diente?", o:["Fresa","Flúor","Azúcar","Sal"], a:1, h:"Está en la pasta."},
-                    {e:"🩸", t:"¿Si sangra la encía?", o:["Dejarlo","Cepillar mejor","Comer","Nada"], a:1, h:"Sangra por suciedad."},
-                    {e:"🍏", t:"¿Fruta que limpia?", o:["Galleta","Manzana","Caramelo","Pan"], a:1, h:"Fruta dura y fibrosa."}
-                ]},
-                { id: 3, name: "Nivel 3: Situaciones", count: 7, qs: [
-                    {e:"🥤", t:"¿Por qué la Gaseosa es mala?", o:["Muy fría","Ácido y Azúcar","Tiene gas","No es mala"], a:1, h:"Daña esmalte."},
-                    {e:"❄️", t:"Dolor agudo con helado. ¿Qué es?", o:["Sensibilidad/Caries","Helado malo","Normal","Dolor cabeza"], a:0, h:"Esmalte dañado."},
-                    {e:"🍾", t:"¿Abrir botella con dientes?", o:["Sí","Claro","¡Nunca!","Una vez"], a:2, h:"Se rompen."},
-                    {e:"😴", t:"¿Dormir sin lavarse?", o:["Nada","Bacterias atacan más","Dientes descansan","Se caen"], a:1, h:"Boca se seca."},
-                    {e:"🤐", t:"¿Chuparse el dedo?", o:["Dientes chuecos","Blancos","Crecen rápido","Nada"], a:0, h:"Deforma mordida."},
-                    {e:"👅", t:"¿Cepillar la lengua?", o:["Color","Evitar mal aliento","Sabor","No"], a:1, h:"Guarda bacterias."},
-                    {e:"🚑", t:"¿Se cae diente definitivo?", o:["Basura","Jabón","Leche y dentista","Llorar"], a:2, h:"Leche lo protege."}
-                ]},
-                { id: 4, name: "Nivel 4: Avanzado", count: 7, qs: [
-                    {e:"🏗️", t:"¿Ligamento Periodontal?", o:["Color","Une diente al hueso","Saliva","Corona"], a:1, h:"Amortiguador."},
-                    {e:"💎", t:"¿Sustancia más dura del cuerpo?", o:["Hueso","Esmalte","Uñas","Cráneo"], a:1, h:"Más que hueso."},
-                    {e:"🚪", t:"¿Cubre grietas de muelas?", o:["Sellantes","Frenillos","Nada","Blanqueo"], a:0, h:"Evita caries."},
-                    {e:"👴", t:"¿Últimas muelas en salir?", o:["Premolar","Canino","Muela Juicio","Incisivo"], a:2, h:"17-21 años."},
-                    {e:"🤤", t:"¿Función Saliva?", o:["Mojar","Proteger y neutralizar","Sed","Nada"], a:1, h:"Defensor natural."},
-                    {e:"🧱", t:"¿Qué es el Sarro?", o:["Placa dura","Comida","Café","Roto"], a:0, h:"Placa calcificada."},
-                    {e:"😬", t:"¿Qué es Bruxismo?", o:["Comer","Rechinar al dormir","Caries","Miedo"], a:1, h:"Por estrés."}
-                ]},
-                { id: 5, name: "Nivel 5: Experto", count: 7, qs: [
-                    {e:"📸", t:"¿Ver dentro del hueso?", o:["Lupa","Espejo","Radiografía","Microscopio"], a:2, h:"Foto interna."},
-                    {e:"🤢", t:"¿Halitosis?", o:["Blancos","Frenillos","Mal aliento","Dolor"], a:2, h:"Olor desagradable."},
-                    {e:"🚧", t:"¿Qué hacen los Brackets?", o:["Liman","Alinean dientes","Decoran","Blanquean"], a:1, h:"Mueven dientes."},
-                    {e:"🍬", t:"¿Dulce más dañino?", o:["Chocolate","Caramelo pegajoso","Helado","Gelatina"], a:1, h:"Se pega mucho."},
-                    {e:"🛡️", t:"¿Evitar dolor siempre?", o:["Pastillas","Prevención","Ayuno","Enjuague"], a:1, h:"Visita regular."},
-                    {e:"👨‍⚕️", t:"¿Especialista niños?", o:["Ortodoncista","Odontopediatra","Cirujano","Periodoncia"], a:1, h:"Pediatra."},
-                    {e:"🏁", t:"¿Mejor sonrisa?", o:["Panadería","Vitalis","Parque","Farmacia"], a:1, h:"¡Vitalis!"}
-                ]}
+            // --- BASE DE DATOS COMPLETA (5 NIVELES) ---
+            const levelsData = [
+                { 
+                    id: 1, name: "Nivel 1: Anatomía Básica", count: 6, qs: [
+                        {e:"🛡️", t:"¿Cuál es la capa más externa y dura del diente?", o:["El Esmalte","La Dentina","La Pulpa","La Encía"], a:0, h:"Es la parte blanca y brillante que ves al sonreír."},
+                        {e:"👶", t:"¿Cuántos dientes de leche tiene un niño?", o:["32 dientes","20 dientes","10 dientes","50 dientes"], a:1, h:"Son 10 arriba y 10 abajo."},
+                        {e:"⚓", t:"¿Qué parte del diente lo mantiene pegado al hueso?", o:["La Corona","El Esmalte","La Raíz","La Lengua"], a:2, h:"Es la parte larga que está escondida bajo la encía."},
+                        {e:"💗", t:"¿Cómo se llama la parte rosada que rodea los dientes?", o:["Labio","Mejilla","Encía","Paladar"], a:2, h:"Es suave, de color rosa y protege el cuello del diente."},
+                        {e:"⚡", t:"¿Qué hay justo en el centro del diente?", o:["Hueso","Aire","Pulpa (Nervio)","Agua"], a:2, h:"Es la parte viva que siente el frío y el calor."},
+                        {e:"🧛", t:"¿Qué dientes usamos para desgarrar la comida?", o:["Molares","Incisivos","Caninos (Colmillos)","Premolares"], a:2, h:"Son los dientes puntiagudos en las esquinas."},
+                    ]
+                },
+                { 
+                    id: 2, name: "Nivel 2: Higiene Diaria", count: 7, qs: [
+                        {e:"🪥", t:"¿Cuál es la cantidad mínima de veces que debes cepillarte al día?", o:["1 vez","2 veces","5 veces","Solo los domingos"], a:1, h:"Una por la mañana y otra (la más importante) por la noche."},
+                        {e:"🧵", t:"¿Qué herramienta sirve para limpiar ENTRE los dientes?", o:["Cepillo normal","Enjuague bucal","Hilo Dental","Palillos"], a:2, h:"Es un hilo muy fino que entra donde el cepillo no llega."},
+                        {e:"🦠", t:"¿Qué comen las bacterias para producir caries?", o:["Agua","Azúcar","Verduras","Aire"], a:1, h:"Les encantan los dulces y golosinas."},
+                        {e:"📅", t:"¿Cada cuánto tiempo debes cambiar tu cepillo de dientes?", o:["Cada 3 meses","Cada año","Nunca","Cada semana"], a:0, h:"O antes si las cerdas están abiertas y despeinadas."},
+                        {e:"🦷", t:"¿Qué pasta de dientes ayuda a fortalecer el esmalte?", o:["Con Sabor a fresa","Con Flúor","Con Azúcar","Con Sal"], a:1, h:"El Flúor es el mineral que hace al diente más fuerte."},
+                        {e:"🩸", t:"Si te sangra la encía al cepillar, ¿qué debes hacer?", o:["Dejar de cepillar","Cepillar mejor esa zona","Comer helado","No hacer nada"], a:1, h:"Sangra porque hay bacterias. Si limpias bien, deja de sangrar."},
+                        {e:"🍏", t:"¿Qué alimento ayuda a limpiar tus dientes al morderlo?", o:["Galletas","Manzana","Caramelo","Pan"], a:1, h:"Es una fruta dura y fibrosa que barre la suciedad."}
+                    ]
+                },
+                { 
+                    id: 3, name: "Nivel 3: Situaciones Reales", count: 7, qs: [
+                        {e:"🥤", t:"Estás en el cine y pides una Gaseosa (Soda). ¿Por qué es mala para tus dientes?", o:["Porque está fría","Tiene mucho Ácido y Azúcar","Porque tiene gas","No es mala"], a:1, h:"El ácido ablanda el diente y el azúcar alimenta bacterias."},
+                        {e:"❄️", t:"Muerdes un helado y sientes un dolor rápido y agudo. ¿Qué podría ser?", o:["Sensibilidad dental","Que el helado está malo","Es normal","Dolor de cabeza"], a:0, h:"Ocurre cuando el esmalte está desgastado o hay una caries."},
+                        {e:"🍾", t:"No tienes destapador y quieres abrir una botella con los dientes. ¿Lo haces?", o:["Sí, soy fuerte","Claro que sí","¡Nunca! Se pueden romper","Solo una vez"], a:2, h:"Los dientes son joyas, no herramientas."},
+                        {e:"😴", t:"Te vas a dormir sin lavarte los dientes. ¿Qué pasa en la noche?", o:["Nada","Las bacterias atacan más porque hay menos saliva","Los dientes descansan","Se caen"], a:1, h:"La saliva nos protege, pero al dormir la boca se seca."},
+                        {e:"🤐", t:"¿Qué pasa si te chupas el dedo hasta muy grande?", o:["Los dientes se enchuecan","Se ponen blancos","Crecen más rápido","Nada"], a:0, h:"El dedo empuja los dientes hacia afuera y deforma la mordida."},
+                        {e:"👅", t:"¿Por qué es importante cepillar también la lengua?", o:["Para que se vea rosa","Para evitar el mal aliento","Para saborear mejor","No es necesario"], a:1, h:"La lengua guarda muchas bacterias que causan mal olor."},
+                        {e:"🚑", t:"Jugando fútbol se te sale un diente definitivo entero (con raíz). ¿Qué haces?", o:["Lo boto","Lo lavo con jabón","Lo pongo en leche y voy al dentista","Lloro"], a:2, h:"¡Nunca lo laves con jabón! La leche ayuda a mantenerlo vivo para reimplantarlo."}
+                    ]
+                },
+                { 
+                    id: 4, name: "Nivel 4: Anatomía Avanzada", count: 7, qs: [
+                        {e:"🏗️", t:"¿Para qué sirve el Ligamento Periodontal?", o:["Para que el diente se vea blanco","Amortigua y une el diente al hueso","Produce saliva","Cubre la corona"], a:1, h:"Es como un 'colchón' elástico entre la raíz y el hueso."},
+                        {e:"💎", t:"¿Cuál es la sustancia biológica más dura de todo el cuerpo humano?", o:["El Hueso","El Esmalte Dental","Las Uñas","El Cráneo"], a:1, h:"Es incluso más duro que tus huesos."},
+                        {e:"🚪", t:"Las muelas tienen grietas profundas. ¿Qué tratamiento las cubre para evitar caries?", o:["Sellantes","Frenillos","Extracción","Blanqueamiento"], a:0, h:"Es una capa plástica que tapa los surcos para que no entre comida."},
+                        {e:"👴", t:"¿Cómo se llaman las últimas muelas que salen (entre los 17 y 21 años)?", o:["Premolares","Caninos","Muelas del Juicio","Incisivos"], a:2, h:"A veces no tienen espacio para salir y hay que sacarlas."},
+                        {e:"🤤", t:"¿Cuál es la función principal de la Saliva?", o:["Solo mojar la comida","Neutralizar ácidos y proteger dientes","Darnos sed","Ninguna"], a:1, h:"Es el defensor natural de tu boca contra el ataque ácido."},
+                        {e:"🧱", t:"¿Qué es el Sarro?", o:["Placa bacteriana endurecida","Restos de comida","Manchas de café","Diente roto"], a:0, h:"Cuando la placa no se limpia, se calcifica y se pone dura como piedra."},
+                        {e:"😬", t:"¿Qué es el Bruxismo?", o:["Comer mucho","Rechinar o apretar los dientes al dormir","Tener caries","Miedo al dentista"], a:1, h:"Suele pasar cuando estás estresado y desgasta los dientes."}
+                    ]
+                },
+                { 
+                    id: 5, name: "Nivel 5: Experto Vitalis", count: 7, qs: [
+                        {e:"📸", t:"¿Qué usa el dentista para ver DENTRO del hueso y entre los dientes?", o:["Lupa","Espejo","Radiografía","Microscopio"], a:2, h:"Una imagen en blanco y negro que revela lo invisible."},
+                        {e:"🤢", t:"¿Qué es la Halitosis?", o:["Dientes blancos","Tener frenillos","Mal aliento crónico","Dolor de muelas"], a:2, h:"Es el término médico para el olor desagradable de la boca."},
+                        {e:"🚧", t:"¿Qué hacen los 'Brackets' o Frenillos?", o:["Liman los dientes","Mueven los dientes a su posición correcta","Solo decoran","Blanquean"], a:1, h:"Usan fuerzas suaves para alinear tu sonrisa."},
+                        {e:"🍬", t:"¿Qué tipo de dulce es el MÁS dañino para los dientes?", o:["Chocolate","Caramelo pegajoso (Masticable)","Helado","Gelatina"], a:1, h:"Al pegarse al diente, el azúcar ataca por mucho más tiempo."},
+                        {e:"🛡️", t:"¿Cuál es la mejor forma de NO tener dolor de muelas nunca?", o:["Tomar pastillas","La Prevención (Revisiones y limpieza)","No comer nada","Usar enjuague"], a:1, h:"Ir al dentista antes de que duela es el secreto."},
+                        {e:"👨‍⚕️", t:"¿Quién es el especialista en niños?", o:["El Ortodoncista","El Odontopediatra","El Cirujano","El Periodoncista"], a:1, h:"Odonto = Diente, Pediatra = Niños."},
+                        {e:"🏁", t:"¿Dónde consigues la mejor sonrisa?", o:["En la panadería","En Vitalis Clínica Odontológica","En el parque","En la farmacia"], a:1, h:"¡Esa es fácil!"}
+                    ]
+                }
             ];
 
-            // --- ESTADO ---
-            let st = {
-                user: { name:"", phone:"", email:"" },
+            // --- ESTADO DEL JUEGO ---
+            let state = {
+                user: { name: "", phone: "" },
                 score: 0,
-                lvl: 0,
-                q: 0,
+                lvlIdx: 0,
+                qIdx: 0,
                 unlocked: [true, false, false, false, false],
                 failed: false
             };
 
-            const fakeRank = [
-                {n:"Martín G.", s:3200}, {n:"Ana R.", s:3000}, 
-                {n:"Tomás L.", s:2850}, {n:"Javier S.", s:2500}
-            ];
+            // --- FUNCIONES AUXILIARES ---
+            function getWeekId() {
+                const d = new Date();
+                const oneJan = new Date(d.getFullYear(),0,1);
+                const nums = Math.floor((d - oneJan) / (24*60*60*1000));
+                return d.getFullYear() + '-' + Math.ceil((d.getDay()+1+nums)/7);
+            }
 
-            // --- FUNCIONES UI ---
             function show(id) {
-                const els = document.querySelectorAll('#v-game-content > div');
-                els.forEach(e => e.classList.add('v-hidden'));
+                document.querySelectorAll('#v-app-container > div').forEach(d => d.classList.add('v-hidden'));
                 document.getElementById(id).classList.remove('v-hidden');
             }
 
-            // --- LÓGICA ---
-            function handleLogin(e) {
+            // --- LÓGICA PRINCIPAL ---
+            function login(e) {
                 e.preventDefault();
-                const name = document.getElementById('v-input-name').value;
-                const phone = document.getElementById('v-input-phone').value;
+                const n = document.getElementById('v-in-name').value;
+                const p = document.getElementById('v-in-phone').value;
                 
-                // Check semanal
-                const last = localStorage.getItem('v_played_'+phone);
-                if(last && (new Date().getTime() - last) < 604800000) { // 7 días
-                    show('v-screen-blocked'); return;
+                if(!n || !p) return alert("Por favor ingresa todos los datos.");
+
+                // Chequeo de bloqueo semanal (Local + DB logic later)
+                const weekId = getWeekId();
+                if(localStorage.getItem('v_played_'+p) === weekId) {
+                    show('v-scr-blocked');
+                    return;
                 }
 
-                st.user = { name, phone };
-                document.getElementById('v-player-name').innerText = name;
-                document.getElementById('v-score-display').classList.remove('v-hidden');
+                state.user = { name: n, phone: p };
+                document.getElementById('v-lbl-name').innerText = n;
+                document.getElementById('v-score-ui').classList.remove('v-hidden');
+                document.getElementById('v-score-ui').innerText = "0 pts";
                 
                 renderMenu();
-                show('v-screen-menu');
+                show('v-scr-menu');
             }
 
             function renderMenu() {
                 const list = document.getElementById('v-levels-list');
                 list.innerHTML = "";
-                levels.forEach((l, i) => {
-                    const lock = !st.unlocked[i];
+                levelsData.forEach((l, i) => {
+                    const locked = !state.unlocked[i];
                     const div = document.createElement('div');
-                    div.className = `v-level-card ${lock?'v-locked':''}`;
-                    div.onclick = () => !lock && startLevel(i);
-                    div.innerHTML = `<div><b>${l.name}</b></div><div>${lock?'🔒':'▶️'}</div>`;
+                    div.className = `v-level-item ${locked ? 'v-locked' : ''}`;
+                    div.onclick = () => !locked && startLevel(i);
+                    div.innerHTML = `
+                        <div>
+                            <div style="font-weight:bold;">${l.name}</div>
+                            <div style="font-size:0.8rem; color:#666;">${l.qs.length} preguntas</div>
+                        </div>
+                        <div>${locked ? '🔒' : '▶️'}</div>
+                    `;
                     list.appendChild(div);
                 });
             }
 
             function startLevel(idx) {
-                st.lvl = idx; st.q = 0;
-                show('v-screen-game');
-                loadQ();
+                state.lvlIdx = idx;
+                state.qIdx = 0;
+                show('v-scr-game');
+                loadQuestion();
             }
 
-            function loadQ() {
-                const l = levels[st.lvl];
-                const q = l.qs[st.q];
+            function loadQuestion() {
+                const l = levelsData[state.lvlIdx];
+                const q = l.qs[state.qIdx];
                 
-                document.getElementById('v-lvl-name').innerText = l.name;
-                document.getElementById('v-q-counter').innerText = `${st.q+1}/${l.count}`;
-                document.getElementById('v-q-emoji').innerText = q.e;
-                document.getElementById('v-q-text').innerText = q.t;
-                document.getElementById('v-hint-text').innerText = q.h;
-                
+                document.getElementById('v-lbl-lvlname').innerText = l.name;
+                document.getElementById('v-lbl-counter').innerText = `${state.qIdx + 1}/${l.qs.length}`;
+                document.getElementById('v-lbl-emoji').innerText = q.e;
+                document.getElementById('v-lbl-text').innerText = q.t;
+                document.getElementById('v-lbl-hint').innerText = q.h;
+
+                // Reset UI
+                document.getElementById('v-hint-box').style.display = 'none';
+                document.getElementById('v-btn-next').classList.add('v-hidden');
+                state.failed = false;
+
+                // Progress Bar
+                const pct = (state.qIdx / l.qs.length) * 100;
+                document.getElementById('v-bar').style.width = pct + "%";
+
+                // Opciones
                 const box = document.getElementById('v-options-box');
                 box.innerHTML = "";
-                document.getElementById('v-hint-box').style.display = 'none';
-                document.getElementById('v-next-btn').classList.add('v-hidden');
-                st.failed = false;
-
-                const pct = (st.q / l.count) * 100;
-                document.getElementById('v-progress-bar').style.width = pct + "%";
-
                 q.o.forEach((opt, idx) => {
                     const btn = document.createElement('button');
-                    btn.className = 'v-option-btn';
+                    btn.className = "v-opt-btn";
                     btn.innerText = opt;
-                    btn.onclick = () => check(idx, btn, q.a);
+                    btn.onclick = () => checkAnswer(idx, btn, q.a);
                     box.appendChild(btn);
                 });
             }
 
-            function check(sel, btn, corr) {
-                const btns = document.querySelectorAll('.v-option-btn');
-                if(sel === corr) {
+            function checkAnswer(selectedIdx, btn, correctIdx) {
+                const allBtns = document.querySelectorAll('.v-opt-btn');
+                
+                if (selectedIdx === correctIdx) {
                     btn.classList.add('v-correct');
-                    btns.forEach(b => b.disabled = true);
-                    st.score += st.failed ? 50 : 100;
-                    document.getElementById('v-current-points').innerText = st.score;
-                    document.getElementById('v-next-btn').classList.remove('v-hidden');
+                    allBtns.forEach(b => b.disabled = true);
+                    
+                    state.score += state.failed ? 50 : 100;
+                    document.getElementById('v-score-ui').innerText = state.score + " pts";
+                    document.getElementById('v-btn-next').classList.remove('v-hidden');
                 } else {
                     btn.classList.add('v-wrong');
                     btn.disabled = true;
-                    st.failed = true;
+                    state.failed = true;
                     document.getElementById('v-hint-box').style.display = 'block';
                 }
             }
 
-            function nextQuestion() {
-                const l = levels[st.lvl];
-                st.q++;
-                if(st.q < l.count) {
-                    loadQ();
+            function next() {
+                const l = levelsData[state.lvlIdx];
+                state.qIdx++;
+                
+                if (state.qIdx < l.qs.length) {
+                    loadQuestion();
                 } else {
-                    if(st.lvl < levels.length - 1) {
-                        st.unlocked[st.lvl+1] = true;
-                        alert("¡Nivel completado!");
+                    // Fin del nivel
+                    if (state.lvlIdx < levelsData.length - 1) {
+                        state.unlocked[state.lvlIdx + 1] = true;
+                        alert("¡Nivel Completado! 🔓 Desbloqueaste el siguiente.");
                         renderMenu();
-                        show('v-screen-menu');
+                        show('v-scr-menu');
                     } else {
                         endGame();
                     }
@@ -425,38 +410,78 @@
             }
 
             function endGame() {
-                localStorage.setItem('v_played_'+st.user.phone, new Date().getTime());
-                saveRank(st.user.name, st.score);
-                document.getElementById('v-final-score').innerText = st.score;
-                
-                if(st.score >= 2900) document.getElementById('v-coupon').classList.remove('v-hidden');
-                show('v-screen-result');
-            }
+                const weekId = getWeekId();
+                localStorage.setItem('v_played_' + state.user.phone, weekId); // Bloqueo Local
+                document.getElementById('v-final-score').innerText = state.score;
 
-            function saveRank(n, s) {
-                let r = JSON.parse(localStorage.getItem('v_rank')||'[]');
-                if(r.length===0) r = [...fakeRank];
-                r.push({n,s});
-                r.sort((a,b)=>b.s-a.s);
-                localStorage.setItem('v_rank', JSON.stringify(r));
+                // Max puntaje aprox: 34 preguntas * 100 = 3400. 
+                // 85% de 3400 = 2890.
+                if (state.score >= 2800) {
+                    document.getElementById('v-coupon').classList.remove('v-hidden');
+                }
+
+                show('v-scr-result');
+
+                // GUARDAR EN FIREBASE
+                if(db) {
+                    db.collection("ranking_vitalis").add({
+                        name: state.user.name,
+                        phone: state.user.phone,
+                        score: state.score,
+                        weekId: weekId,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    }).then(() => console.log("Guardado en nube"));
+                }
             }
 
             function showRanking() {
-                let r = JSON.parse(localStorage.getItem('v_rank')||'[]');
-                if(r.length===0) r = [...fakeRank];
-                const bod = document.getElementById('v-ranking-body');
-                bod.innerHTML = "";
-                r.slice(0,10).forEach((e,i)=>{
-                    const tr = document.createElement('tr');
-                    if(e.n === st.user.name) tr.className = 'v-user-row';
-                    tr.innerHTML = `<td>${i+1}</td><td>${e.n}</td><td style="text-align:right">${e.s}</td>`;
-                    bod.appendChild(tr);
-                });
-                show('v-screen-ranking');
+                show('v-scr-ranking');
+                const tbody = document.getElementById('v-rank-body');
+                tbody.innerHTML = "<tr><td colspan='3'>Cargando ranking...</td></tr>";
+
+                if(!db) {
+                    tbody.innerHTML = "<tr><td colspan='3'>Error: Configura Firebase en el código.</td></tr>";
+                    return;
+                }
+
+                const weekId = getWeekId();
+                
+                db.collection("ranking_vitalis")
+                    .where("weekId", "==", weekId)
+                    .orderBy("score", "desc")
+                    .limit(10)
+                    .get()
+                    .then((snapshot) => {
+                        tbody.innerHTML = "";
+                        if (snapshot.empty) {
+                            tbody.innerHTML = "<tr><td colspan='3'>Aún no hay puntajes esta semana.</td></tr>";
+                            return;
+                        }
+                        
+                        let rank = 1;
+                        snapshot.forEach((doc) => {
+                            const data = doc.data();
+                            const tr = document.createElement('tr');
+                            if(data.name === state.user.name) tr.className = "v-user-row";
+                            
+                            let medal = rank;
+                            if(rank===1) medal="🥇";
+                            if(rank===2) medal="🥈";
+                            if(rank===3) medal="🥉";
+
+                            tr.innerHTML = `<td>${medal}</td><td>${data.name}</td><td style="text-align:right">${data.score}</td>`;
+                            tbody.appendChild(tr);
+                            rank++;
+                        });
+                    })
+                    .catch((error) => {
+                        console.error("Error ranking:", error);
+                        tbody.innerHTML = "<tr><td colspan='3'>Error cargando datos.</td></tr>";
+                    });
             }
 
-            // Public Methods
-            return { handleLogin, nextQuestion, showRanking };
+            return { login, next, showRanking };
+
         })();
     </script>
 </section>
