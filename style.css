@@ -235,3 +235,59 @@
         background-color: #ccc; /* Color celeste */
     }
 }
+
+/* --- MINI CARRUSELES EN TARJETAS DE ESPECIALIDAD --- */
+.mini-carousel {
+    position: relative;
+    width: 100%;
+    height: 220px; /* Puedes cambiar esto si quieres las fotos más altas o bajas */
+    overflow: hidden;
+}
+
+.mini-carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.mini-carousel-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0; 
+}
+
+.mini-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    color: var(--dark-blue);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 50%;
+    transition: background 0.3s;
+    z-index: 2;
+}
+
+.mini-btn:hover {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.mini-btn.prev { left: 10px; }
+.mini-btn.next { right: 10px; }
+
+/* Ajuste para que el texto no quede pegado a la foto */
+.service-card {
+    padding-bottom: 20px; /* Espacio extra abajo */
+}
+.service-card h3 {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+.service-card p, .service-card ul {
+    padding: 0 20px;
+}
