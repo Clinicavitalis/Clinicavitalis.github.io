@@ -214,10 +214,24 @@
 
 /* --- SEPARADORES DE MENÚ VERTICALES (Solo Escritorio) --- */
 @media (min-width: 769px) {
-    /* Le pone una línea a todos los enlaces MENOS al último */
-    .nav-links a:not(:last-child) {
-        border-right: 2px solid #ccc; /* Grosor y color de la rayita (celeste claro) */
-        padding-right: 15px; /* Espacio entre el texto y la rayita */
-        margin-right: 8px;   /* Espacio entre la rayita y el siguiente texto */
+    /* 1. Igualamos los espacios a ambos lados de cada palabra */
+    .nav-links a {
+        position: relative;
+        padding-left: 15px !important; 
+        padding-right: 15px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* 2. Dibujamos la rayita flotante exactamente en el borde derecho */
+    .nav-links a:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0; /* Lo empuja al límite del espacio derecho */
+        top: 50%; /* Lo baja a la mitad... */
+        transform: translateY(-50%); /* ...y lo centra verticalmente perfecto */
+        height: 16px; /* Altura de la rayita (cámbialo si la quieres más larga o corta) */
+        width: 2px; /* Grosor de la rayita */
+        background-color: #ccc; /* Color celeste */
     }
 }
