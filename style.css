@@ -216,8 +216,8 @@
 @media (min-width: 769px) {
     /* Le pone una línea a todos los enlaces MENOS al último */
     .nav-links a:not(:last-child) {
-        border-right: 4px solid #ccc; /* Grosor y color de la rayita (celeste claro) */
-        padding-right: 8px; /* Espacio entre el texto y la rayita */
+        border-right: 2px solid #ccc; /* Grosor y color de la rayita (celeste claro) */
+        padding-right: 15px; /* Espacio entre el texto y la rayita */
         margin-right: 8px;   /* Espacio entre la rayita y el siguiente texto */
     }
 }
