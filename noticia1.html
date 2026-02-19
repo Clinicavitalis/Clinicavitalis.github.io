@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo | Vitalis Clínica Odontológica</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Estilos específicos para el diseño del Blog */
+        .blog-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--white) 100%);
+            padding: 60px 5% 40px;
+            text-align: center;
+        }
+
+        .blog-tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .blog-title {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin: 20px 0;
+            line-height: 1.2;
+        }
+
+        .blog-meta {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .blog-content {
+            max-width: 800px;
+            margin: -30px auto 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative; /* Para que suba un poco sobre el fondo celeste */
+        }
+
+        .blog-content img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        .blog-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .blog-content h3 {
+            color: var(--primary);
+            margin-top: 40px;
+        }
+
+        /* SECCIÓN DE COMENTARIOS */
+        .comments-section {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            padding: 0 5%;
+        }
+
+        /* Responsive para celular */
+        @media (max-width: 768px) {
+            .blog-title { font-size: 2rem; }
+            .blog-content { padding: 20px; margin-top: -10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Vitalis" class="logo-img" style="height: 50px;">
+            </a>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()" style="font-size: 2rem; cursor: pointer; color: var(--primary); display: none;">
+            ☰
+        </div>
+        <div class="nav-links" id="menu-links">
+            <a href="index.html">Inicio</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="educacion.html" class="active" style="color: var(--primary); font-weight: bold;">Educación</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <span class="blog-tag">Odontopediatría</span>
+        <h1 class="blog-title">¿Cuándo debo llevar a mi hijo al dentista por primera vez?</h1>
+        <div class="blog-meta">
+            Escrito por <strong>Dra. Catalina Rivera</strong>
+        </div>
+    </header>
+
+    <main class="blog-content">
+        <img src="img/dra_catalina.jpg" alt="Niño sonriendo en el dentista">
+        
+        <p>Una de las preguntas más frecuentes que recibimos en <strong>Vitalis</strong> es sobre la edad ideal para la primera visita al dentista. Muchos padres creen que deben esperar a que el niño tenga todos sus dientes de leche, o peor aún, a que sienta algún dolor. ¡Pero esto es un mito!</p>
+        
+        <h3>La regla del primer diente</h3>
+        <p>La recomendación oficial es realizar la primera visita <strong>cuando aparece el primer diente de leche</strong>, o a más tardar, al cumplir el primer año de vida. ¿Por qué tan pronto? Porque nos permite hacer prevención real.</p>
+        
+        <p>En esta primera cita no usamos el torno ni hacemos procedimientos invasivos. Es una visita de aclimatación donde el niño conoce la clínica, juega en nuestra área infantil y se familiariza con el entorno para evitar el "miedo al dentista" en el futuro.</p>
+
+        <h3>¿Qué revisamos en esta primera cita?</h3>
+        <ul>
+            <li>Evaluamos el riesgo de caries (incluso la caries de biberón).</li>
+            <li>Revisamos el desarrollo de los maxilares.</li>
+            <li>Enseñamos a los padres las técnicas correctas de higiene para bebés.</li>
+            <li>Aclaramos dudas sobre el uso del chupete y la alimentación.</li>
+        </ul>
+
+        <p>Recuerda: prevenir siempre es más fácil, económico y menos doloroso que curar. ¡Agenda una evaluación y cuidemos juntos la sonrisa de tu pequeño!</p>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/56900000000" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none; border-radius: 50px; background: var(--primary); color: white; font-weight: bold;">Agendar Evaluación Infantil</a>
+        </div>
+    </main>
+
+    <section class="comments-section" id="comentarios">
+        <h3 style="color: var(--dark-blue); border-bottom: 2px solid #eee; padding-bottom: 10px;">Comentarios y Dudas</h3>
+        
+        <div id="disqus_thread"></div>
+        
+        <script>
+            (function() { 
+                var d = document, s = d.createElement('script');
+                
+                // ⚠️ ¡ATENCIÓN AQUÍ! ⚠️
+                // Reemplaza TU_SHORTNAME_AQUI con el nombre que te dio Disqus.
+                // Ejemplo: s.src = 'https://clinicavitalis.disqus.com/embed.js';
+                
+                s.src = 'https://clinicavitalis.disqus.com/embed.js';
+                
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Por favor, activa JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios.</a></noscript>
+    </section>
+
+    <footer style="background: var(--dark-blue); color: white; text-align: center; padding: 20px;">
+        <p>© 2022 Vitalis Clínica Odontológica.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-links');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+                menu.style.flexDirection = "column";
+            }
+        }
+    </script>
+</body>
+</html>
