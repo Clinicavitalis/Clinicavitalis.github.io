@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo | Vitalis Clínica Odontológica</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Estilos específicos para el diseño del Blog */
+        .blog-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--white) 100%);
+            padding: 60px 5% 40px;
+            text-align: center;
+        }
+
+        .blog-tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .blog-title {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin: 20px 0;
+            line-height: 1.2;
+        }
+
+        .blog-meta {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .blog-content {
+            max-width: 800px;
+            margin: -30px auto 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative; /* Para que suba un poco sobre el fondo celeste */
+        }
+
+        .blog-content img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            object-fit: cover;
+            max-height: 400px;
+        }
+
+        .blog-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .blog-content h3 {
+            color: var(--primary);
+            margin-top: 40px;
+        }
+
+        /* SECCIÓN DE COMENTARIOS */
+        .comments-section {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            padding: 0 5%;
+        }
+
+        /* Responsive para celular */
+        @media (max-width: 768px) {
+            .blog-title { font-size: 2rem; }
+            .blog-content { padding: 20px; margin-top: -10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Vitalis" class="logo-img" style="height: 50px;">
+            </a>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()" style="font-size: 2rem; cursor: pointer; color: var(--primary); display: none;">
+            ☰
+        </div>
+        <div class="nav-links" id="menu-links">
+            <a href="index.html">Inicio</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="educacion.html" class="active" style="color: var(--primary); font-weight: bold;">Educación</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+    </nav>
+
+  <header class="blog-header">
+        <span class="blog-tag">Odontología General</span>
+        <h1 class="blog-title">Alimentos amigos de tus dientes</h1>
+        <div class="blog-meta">
+            Escrito por <strong>Dra. Michelle Provost</strong>
+        </div>
+    </header>
+
+    <main class="blog-content">
+        <img src="img/noticia2.png" alt="Alimentación saludable para una sonrisa sana">
+        
+        <p><strong>El secreto de una sonrisa sana está en tu plato.</strong> Más allá de una técnica de cepillado impecable, lo que decides ingerir en cada comida puede ser el mejor aliado —o el peor enemigo— de tu esmalte dental.</p>
+        
+        <p>En <strong>Clínica Vitalis</strong>, nuestro enfoque es la salud integral. Por eso, destacamos que una <strong>dieta equilibrada es la primera línea de defensa</strong> para lucir una sonrisa radiante y, sobre todo, funcional.</p>
+
+        <h3>El "botiquín" nutricional en tu cocina</h3>
+        <p>No todos los alimentos afectan igual a nuestra boca. Mientras que los azúcares procesados alimentan a las bacterias, existen otros productos que actúan como <strong>limpiadores naturales y protectores del esmalte</strong>:</p>
+        
+        <ul>
+            <li><strong>Lácteos (Queso, yogur y leche):</strong> Son ricos en calcio y fosfatos, esenciales para <strong>remineralizar el diente</strong> y neutralizar los ácidos de la placa.</li>
+            <li><strong>Frutas y verduras crujientes:</strong> La manzana, la zanahoria y el apio requieren una masticación intensa que estimula la <strong>producción de saliva</strong>, nuestro protector natural.</li>
+            <li><strong>Té verde y negro:</strong> Contienen polifenoles que ayudan a <strong>frenar el crecimiento de bacterias</strong> nocivas en la cavidad oral.</li>
+            <li><strong>Agua:</strong> La bebida reina para <strong>eliminar residuos y mantener los tejidos hidratados</strong> sin riesgo de erosión.</li>
+        </ul>
+
+        <blockquote>
+            <p><em>"La salud bucal comienza desde adentro. En nuestra consulta diaria en <strong>Clínica Vitalis</strong> vemos que los pacientes que incorporan alimentos fibrosos presentan <strong>encías mucho más firmes y menos sensibilidad dental</strong>".</em></p>
+        </blockquote>
+
+        <h3>Compromiso con la prevención</h3>
+        <p>En nuestra clínica, nuestra misión es educar. Entendemos que una sonrisa bonita es el reflejo de un cuerpo sano. Una <strong>dieta inteligente sumada a tus revisiones periódicas</strong> es la clave para que tus dientes te acompañen toda la vida.</p>
+
+        <p>Recuerda: cuidar lo que comes es el complemento perfecto para tu higiene diaria. <strong>¿Hace cuánto no revisas el estado de tu sonrisa?</strong> Agenda una evaluación y diseñemos juntos un plan preventivo a tu medida.</p>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/56957006747" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none; border-radius: 50px; background: var(--primary); color: white; font-weight: bold;">Agendar Evaluación en Clínica Vitalis</a>
+        </div>
+    </main>
+
+    <section class="comments-section" id="comentarios">
+        <h3 style="color: var(--dark-blue); border-bottom: 2px solid #eee; padding-bottom: 10px;">Comentarios y Dudas</h3>
+        
+        <div id="disqus_thread"></div>
+        
+        <script>
+            (function() { 
+                var d = document, s = d.createElement('script');
+                
+                // ⚠️ ¡ATENCIÓN AQUÍ! ⚠️
+                // Reemplaza TU_SHORTNAME_AQUI con el nombre que te dio Disqus.
+                // Ejemplo: s.src = 'https://clinicavitalis.disqus.com/embed.js';
+                
+                s.src = 'https://clincavitalis.disqus.com/embed.js';
+                
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Por favor, activa JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios.</a></noscript>
+    </section>
+
+    <footer style="background: var(--dark-blue); color: white; text-align: center; padding: 20px;">
+        <p>© 2022 Vitalis Clínica Odontológica.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-links');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+                menu.style.flexDirection = "column";
+            }
+        }
+    </script>
+</body>
+</html>
