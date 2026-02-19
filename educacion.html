@@ -49,54 +49,8 @@
         📱 Nuestros Reels Educativos
     </h3>
     
-    <div class="video-grid">
-        
-        <div class="video-card">
-            <div class="video-wrapper vertical">
-                <iframe 
-                    src="https://www.instagram.com/reel/DURDN1gEcNr/embed" 
-                    width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true">
-                </iframe>
-            </div>
-            <div class="video-info">
-                <h4>¿Has escuchado hablar de la endodoncia y no sabes exactamente qué es?</h4>
-                <p>La Dra. Natalia Moscoso, especialista en endodoncia de Clínica Vitalis de Malalhue, nos explica de forma sencilla que la endodoncia es un tratamiento que permite salvar un diente dañado por caries profundas, infecciones o traumatismos, evitando su extracción. ¡Dale play!</p>
-            </div>
-        </div>
-
-        <div class="video-card">
-            <div class="video-wrapper vertical">
-                <iframe 
-                    src="https://www.instagram.com/reel/DRhcBU0Dc3Y/embed" 
-                    width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true">
-                </iframe>
-            </div>
-            <div class="video-info">
-                <h4>¿Estás en Fonasa tramo B, C o D?
-Entonces, ¡esto te interesa! 😲</h4>
-                <p>Con Fonasa, puedes recibir un reembolso parcial en el pago de tu prótesis dental.
-Nosotros te guiamos en cada paso para que aproveches este beneficio 💬🦷
-
-✨ ¡Recupera tu sonrisa sin vaciar tu bolsillo!.</p>
-            </div>
-        </div>
-
-        <div class="video-card">
-            <div class="video-wrapper vertical">
-                <iframe 
-                    src="https://www.instagram.com/p/DP1UdLNjWt1/embed" 
-                    width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true">
-                </iframe>
-            </div>
-            <div class="video-info">
-                <h4>🪥 ¿Cuánta pasta dental necesita tu hijo? ¡Menos de lo que imaginas! 👶</h4>
-                <p>♥️En Clínica Vitalis, te enseñamos paso a paso cómo hacerlo.
-👶 Usa solo un granito de arroz de pasta dental para los más pequeños.
-🧒 Desde los 6 años, el tamaño de un arveja es suficiente.Porque una sonrisa sana comienza en casa ✨
-📲 Agenda tu control infantil y aprendan juntos con nuestros especialistas.</p>
-            </div>
-        </div>
-
+    <div class="video-grid" id="videos-dinamicos">
+        <p style="text-align: center; width: 100%; color: var(--primary);">Cargando videos de Vitalis...</p>
     </div>
 
     <hr style="border: 0; border-top: 1px solid #ddd; margin: 60px 0;">
@@ -153,6 +107,43 @@ Nosotros te guiamos en cada paso para que aproveches este beneficio 💬🦷
         }
     }
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+    <script>
+        // Pega el enlace de tu Google Sheets (termina en .csv) entre las comillas:
+        const urlExcel = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTOyrxE2eppgDfJCi61M1yba6P0KWgahZDYUyRgChxjzwbccwTr4NuZw7linr4p0z1L_FeHX7qvqmxF/pubhtml';
+
+        Papa.parse(urlExcel, {
+            download: true,
+            header: true,
+            complete: function(results) {
+                const videos = results.data;
+                const contenedor = document.getElementById('videos-dinamicos');
+                contenedor.innerHTML = ''; // Borra el texto de "Cargando..."
+
+                // Por cada fila en tu Excel, crea una tarjeta de video
+                videos.forEach(video => {
+                    // Solo lo crea si pusiste un título y un enlace en esa fila
+                    if(video.Titulo && video.Enlace) {
+                        const tarjetaHTML = `
+                        <div class="video-card">
+                            <div class="video-wrapper vertical">
+                                <iframe src="${video.Enlace}" width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h4>${video.Titulo}</h4>
+                                <p>${video.Descripcion}</p>
+                            </div>
+                        </div>`;
+                        
+                        // Añade la tarjeta a la página
+                        contenedor.innerHTML += tarjetaHTML;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 
