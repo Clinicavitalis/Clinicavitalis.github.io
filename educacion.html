@@ -59,39 +59,9 @@
         📰 Noticias y Consejos Vitalis
     </h3>
 
-    <div class="news-grid">
-        <article class="news-card">
-            <div class="news-image" style="background-image: url('img/primerdiente.png');"></div> <div class="news-content">
-                <span class="news-tag">Novedad</span>
-                <h4>¿Cuándo debo llevar a mi hijo al dentista por primera vez?</h4>
-                <p>Nuestra odontopediatra, Catalina Rivera, nos responde esta pregunta muy comun que tienen los padres y/o tutores en sus primeros años de vida</p>
-                <a href="noticia1.html" class="read-more">Leer más &rarr;</a>
-            </div>
-        </article>
-
-        <article class="news-card">
-            <div class="news-image" style="background-image: url('img/noticia2.png');"></div> <div class="news-content">
-                <span class="news-tag">Novedad</span>
-            <div class="news-content">
-                <h4>Alimentos amigos de tus dientes</h4>
-                <p>No todo es dejar el azúcar. Conoce qué alimentos ayudan a limpiar tu esmalte naturalmente.</p>
-                <a href="noticia2.html" class="read-more">Leer más &rarr;</a>
-            </div>
-        </article>
-
-        <article class="news-card">
-            <div class="news-image" style="background-color: #b3d6fe;">
-                <span style="font-size:3rem;">👶</span>
-            </div>
-            <div class="news-content">
-                <span class="news-tag">Implantologia bucomaxilar</span>
-                <h4>Implantes Dentales: La solución definitiva para recuperar tu sonrisa</h4>
-                <p>El Dr. Bernardo Sandoval te invita a evaluar el tratamiento de implantes dentales, por que la perdida dental es mas que solo no poder comer</p>
-                <a href="noticia3.html" class="read-more">Leer más &rarr;</a>
-            </div>
-        </article>
+    <div class="news-grid" id="noticias-dinamicas">
+        <p style="text-align: center; width: 100%; color: var(--primary);">Cargando noticias de Vitalis...</p>
     </div>
-
 </section>
 
     <script>
@@ -137,6 +107,39 @@
                         
                         // Añade la tarjeta a la página
                         contenedor.innerHTML += tarjetaHTML;
+                    }
+                });
+            }
+        });
+    </script>
+
+<script>
+        // Pega el enlace CSV de tu pestaña NOTICIAS aquí abajo:
+        const urlNoticias = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTOyrxE2eppgDfJCi61M1yba6P0KWgahZDYUyRgChxjzwbccwTr4NuZw7linr4p0z1L_FeHX7qvqmxF/pub?gid=680320649&single=true&output=csv';
+
+        Papa.parse(urlNoticias, {
+            download: true,
+            header: true,
+            complete: function(results) {
+                const noticias = results.data;
+                const contenedorNoticias = document.getElementById('noticias-dinamicas');
+                contenedorNoticias.innerHTML = ''; // Borra el texto de "Cargando..."
+
+                // Por cada fila, crea una tarjeta de noticia
+                noticias.forEach(noticia => {
+                    if(noticia.Titulo && noticia.Enlace) {
+                        const tarjetaHTML = `
+                        <article class="news-card">
+                            <div class="news-image" style="background-image: url('${noticia.Imagen}');"></div>
+                            <div class="news-content">
+                                <span class="news-tag">${noticia.Etiqueta}</span>
+                                <h4>${noticia.Titulo}</h4>
+                                <p>${noticia.Descripcion}</p>
+                                <a href="${noticia.Enlace}" class="read-more">Leer más &rarr;</a>
+                            </div>
+                        </article>`;
+                        
+                        contenedorNoticias.innerHTML += tarjetaHTML;
                     }
                 });
             }
