@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artículo | Vitalis Clínica Odontológica</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Estilos específicos para el diseño del Blog */
+        .blog-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--white) 100%);
+            padding: 60px 5% 40px;
+            text-align: center;
+        }
+
+        .blog-tag {
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .blog-title {
+            color: var(--dark-blue);
+            font-size: 2.5rem;
+            margin: 20px 0;
+            line-height: 1.2;
+        }
+
+        .blog-meta {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .blog-content {
+            max-width: 800px;
+            margin: -30px auto 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative; /* Para que suba un poco sobre el fondo celeste */
+        }
+
+        .blog-content img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .blog-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .blog-content h3 {
+            color: var(--primary);
+            margin-top: 40px;
+        }
+
+        /* SECCIÓN DE COMENTARIOS */
+        .comments-section {
+            max-width: 800px;
+            margin: 0 auto 80px;
+            padding: 0 5%;
+        }
+
+        /* Responsive para celular */
+        @media (max-width: 768px) {
+            .blog-title { font-size: 2rem; }
+            .blog-content { padding: 20px; margin-top: -10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="img/logo.jpg" alt="Vitalis" class="logo-img" style="height: 50px;">
+            </a>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()" style="font-size: 2rem; cursor: pointer; color: var(--primary); display: none;">
+            ☰
+        </div>
+        <div class="nav-links" id="menu-links">
+            <a href="index.html">Inicio</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="equipo.html">Equipo</a>
+            <a href="educacion.html" class="active" style="color: var(--primary); font-weight: bold;">Informacion educativa</a>
+            <a href="contacto.html">Contacto</a>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <span class="blog-tag">Rehabilitación Oral e Implantología</span>
+        <h1 class="blog-title">Implantes Dentales: La solución definitiva para recuperar tu sonrisa</h1>
+        <div class="blog-meta">
+            Escrito por: <strong>Dr. Bernardo Sandoval</strong>
+        </div>
+    </header>
+
+    <main class="blog-content">
+        <img src="img/noticia3.png" alt="Paciente adulto sonriendo con confianza">
+        
+        <p><strong>Perder un diente es mucho más que un problema estético.</strong> Afecta tu forma de comer, de hablar y, sobre todo, tu seguridad personal. Afortunadamente, la odontología moderna ofrece una segunda oportunidad que se siente y se ve completamente natural.</p>
+        
+        <p>En <strong>Clínica Vitalis</strong>, entendemos que recuperar una pieza dental es recuperar calidad de vida. Por eso, apostamos por la implantología como la alternativa más segura y duradera frente a las antiguas prótesis removibles o puentes que dañan dientes vecinos.</p>
+
+        <h3>¿Qué es exactamente un implante dental?</h3>
+        <p>Piénsalo como una <strong>nueva raíz artificial</strong>. Es un pequeño tornillo, generalmente de titanio biocompatible, que se integra con el hueso de tu mandíbula. Sobre esta base sólida, colocamos una corona de cerámica diseñada a medida que imita a la perfección la forma y color de tus dientes naturales.</p>
+
+        <h3>Más allá de la estética: Beneficios funcionales clave</h3>
+        <p>Elegir implantes en Clínica Vitalis significa elegir una solución integral a largo plazo:</p>
+        
+        <ul>
+            <li><strong>Frenan la pérdida ósea:</strong> Cuando falta un diente, el hueso empieza a reabsorberse (desaparecer), lo que envejece el rostro. El implante estimula el hueso y lo mantiene sano.</li>
+            <li><strong>Masticación al 100%:</strong> Podrás volver a comer tus alimentos favoritos (manzanas, carnes, frutos secos) con la misma fuerza y seguridad que con tus dientes naturales.</li>
+            <li><strong>Protegen los dientes vecinos:</strong> A diferencia de los puentes tradicionales, no necesitamos tallar o desgastar los dientes sanos adyacentes para sujetar la nueva pieza.</li>
+            <li><strong>Durabilidad excepcional:</strong> Con los cuidados adecuados y las revisiones periódicas en nuestra clínica, un implante puede durar toda la vida.</li>
+        </ul>
+
+        <blockquote>
+            <p><em>"La frase que más escuchamos tras finalizar un tratamiento de implantes es: <strong>'Ojalá lo hubiera hecho antes'</strong>. Ver a un paciente recuperar la confianza para reír sin taparse la boca es nuestra mayor satisfacción en Clínica Vitalis".</em></p>
+        </blockquote>
+
+        <h3>Tu camino hacia una boca completa</h3>
+        <p>Cada boca es un universo. En <strong>Clínica Vitalis</strong>, utilizamos diagnóstico por imagen de última generación para planificar la colocación del implante con milimétrica precisión, garantizando un proceso seguro y predecible.</p>
+
+        <p>No te conformes con espacios vacíos o prótesis incómodas que se mueven. <strong>Recupera la funcionalidad completa de tu boca.</strong></p>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/56957006747" class="btn-primary" style="display: inline-block; padding: 12px 30px; text-decoration: none; border-radius: 50px; background: #3498db; color: white; font-weight: bold;">Solicitar Evaluación de Implantes</a>
+        </div>
+    </main>
+
+    <section class="comments-section" id="comentarios">
+        <h3 style="color: var(--dark-blue); border-bottom: 2px solid #eee; padding-bottom: 10px;">Comentarios y Dudas</h3>
+        
+        <div id="disqus_thread"></div>
+        
+        <script>
+            (function() { 
+                var d = document, s = d.createElement('script');
+                
+                // ⚠️ ¡ATENCIÓN AQUÍ! ⚠️
+                // Reemplaza TU_SHORTNAME_AQUI con el nombre que te dio Disqus.
+                // Ejemplo: s.src = 'https://clinicavitalis.disqus.com/embed.js';
+                
+                s.src = 'https://clincavitalis.disqus.com/embed.js';
+                
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Por favor, activa JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios.</a></noscript>
+    </section>
+
+    <footer style="background: var(--dark-blue); color: white; text-align: center; padding: 20px;">
+        <p>© 2022 Vitalis Clínica Odontológica.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-links');
+            if (menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+                menu.style.flexDirection = "column";
+            }
+        }
+    </script>
+</body>
+
+</html>
