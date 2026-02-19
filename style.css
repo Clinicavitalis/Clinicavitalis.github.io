@@ -211,3 +211,13 @@
     min-width: 100% !important;
     margin: 0 !important;
 }
+
+/* --- SEPARADORES DE MENÚ VERTICALES (Solo Escritorio) --- */
+@media (min-width: 769px) {
+    /* Le pone una línea a todos los enlaces MENOS al último */
+    .nav-links a:not(:last-child) {
+        border-right: 2px solid #b3d6fe; /* Grosor y color de la rayita (celeste claro) */
+        padding-right: 15px; /* Espacio entre el texto y la rayita */
+        margin-right: 5px;   /* Espacio entre la rayita y el siguiente texto */
+    }
+}
