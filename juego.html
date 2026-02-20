@@ -415,15 +415,41 @@
                 }
             }
 
-            function endGame() {
+           function endGame() {
                 const weekId = getWeekId();
                 localStorage.setItem('v_played_' + state.user.phone, weekId); // Bloqueo Local
                 document.getElementById('v-final-score').innerText = state.score;
 
-                // Max puntaje aprox: 34 preguntas * 100 = 3400. 
-                // 85% de 3400 = 2890.
-                if (state.score >= 2800) {
-                    document.getElementById('v-coupon').classList.remove('v-hidden');
+                // 1. Calcular el porcentaje de aciertos
+                let totalQuestions = 0;
+                levelsData.forEach(level => totalQuestions += level.qs.length);
+                const maxPossibleScore = totalQuestions * 100; // 3400 puntos posibles
+                const percentage = (state.score / maxPossibleScore) * 100;
+
+                // 2. Asignar el premio según el porcentaje
+                const couponDiv = document.getElementById('v-coupon');
+                
+                if (percentage >= 85) {
+                    // PREMIO MAYOR: 85% o más (20% de descuento)
+                    couponDiv.innerHTML = `
+                        <strong style="color:#FF6F00;">🌟 ¡EXCELENCIA DENTAL!</strong><br>
+                        <p style="font-size:0.9rem; margin:5px 0;">¡Lograste más del 85%! Tienes un <b>20% de descuento</b>.</p>
+                        <span style="font-size:1.5rem; letter-spacing:2px; font-weight:bold; background:white; padding:5px 10px; display:inline-block; border:1px solid #FFCA28;">DIENTE20</span>
+                    `;
+                    couponDiv.classList.remove('v-hidden');
+                } 
+                else if (percentage >= 70) {
+                    // PREMIO MEDIO: Entre 70% y 84% (10% de descuento)
+                    couponDiv.innerHTML = `
+                        <strong style="color:#FF6F00;">⭐ ¡MUY BUEN TRABAJO!</strong><br>
+                        <p style="font-size:0.9rem; margin:5px 0;">¡Lograste más del 70%! Tienes un <b>10% de descuento</b>.</p>
+                        <span style="font-size:1.5rem; letter-spacing:2px; font-weight:bold; background:white; padding:5px 10px; display:inline-block; border:1px solid #FFCA28;">DIENTE10</span>
+                    `;
+                    couponDiv.classList.remove('v-hidden');
+                } 
+                else {
+                    // SIN PREMIO: Menos del 70%
+                    couponDiv.classList.add('v-hidden');
                 }
 
                 show('v-scr-result');
