@@ -240,7 +240,7 @@
 .mini-carousel {
     position: relative;
     width: 100%;
-    height: 220px; /* Puedes cambiar esto si quieres las fotos más altas o bajas */
+    height: 400px; /* Puedes cambiar esto si quieres las fotos más altas o bajas */
     overflow: hidden;
 }
 
@@ -254,8 +254,9 @@
 .mini-carousel-track video {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    flex-shrink: 0;
+    object-fit: cover; /* <--- VOLVEMOS A COVER PARA LLENAR EL ANCHO */
+    object-position: top center; /* <--- MAGIA: Evita que se corten las cabezas */
+    flex-shrink: 0; 
     background-color: #f4faff;
 }
 
