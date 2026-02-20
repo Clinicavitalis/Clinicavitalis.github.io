@@ -260,28 +260,47 @@
     background-color: #f4faff;
 }
 
+/* --- BOTONES DE NAVEGACIÓN "PRO" --- */
 .mini-btn {
     position: absolute;
     top: 50%;
+    /* Centrado vertical perfecto y forma circular */
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    width: 45px;  /* Ancho fijo */
+    height: 45px; /* Alto igual al ancho para que sea un círculo perfecto */
+    border-radius: 50%; /* Esto hace la magia del círculo */
+    
+    /* Estilo visual */
+    background: rgba(255, 255, 255, 0.85); /* Blanco semitransparente */
     border: none;
-    color: var(--dark-blue);
-    font-size: 1.2rem;
+    color: var(--dark-blue, #003366); /* Color del icono (tu azul corporativo) */
+    font-size: 1.4rem; /* Icono un poco más grande */
     cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 50%;
-    transition: background 0.3s;
+    
+    /* Sombra suave para dar profundidad (efecto flotante) */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    
+    /* Flexbox para centrar el icono perfectamente dentro del círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Transición suave para el efecto hover */
+    transition: all 0.3s ease;
     z-index: 2;
+    padding: 0; /* Quitamos el padding extra */
 }
 
+/* Efecto al pasar el mouse por encima */
 .mini-btn:hover {
-    background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background: white; /* Blanco sólido */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada */
+    transform: translateY(-50%) scale(1.05); /* Crece un poquito */
 }
 
-.mini-btn.prev { left: 10px; }
-.mini-btn.next { right: 10px; }
+/* Posicionamiento */
+.mini-btn.prev { left: 15px; } /* Un poco más separados del borde */
+.mini-btn.next { right: 15px; }
 
 /* Ajuste para que el texto no quede pegado a la foto */
 .service-card {
