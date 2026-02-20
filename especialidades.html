@@ -199,7 +199,7 @@
         function moverMiniCarrusel(botonClickeado, direccion) {
             const contenedorCarrusel = botonClickeado.closest('.mini-carousel');
             const pista = contenedorCarrusel.querySelector('.mini-carousel-track');
-            const totalFotos = pista.querySelectorAll('img').length;
+            const totalFotos = pista.children.length;
             let indiceActual = parseInt(contenedorCarrusel.getAttribute('data-index'));
 
             indiceActual += direccion;
