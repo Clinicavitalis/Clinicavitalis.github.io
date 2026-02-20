@@ -18,74 +18,84 @@
         .nav-links a { text-decoration: none; color: var(--text-gray); margin-left: 20px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary); }
 
-        /* --- CABECERA PRINCIPAL (HERO) CON IMAGEN DE FONDO --- */
+/* --- CABECERA PRINCIPAL (HERO) MEJORADA --- */
 .hero {
-    /* AQUÍ PONES LA RUTA DE TU IMAGEN DE FONDO. Asegúrate de tener 'fondo-clinica.jpg' en tu carpeta img */
-    background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('img/fondo-clinica.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Efecto Parallax (la imagen se queda quieta al hacer scroll) */
+    /* El filtro azul oscuro sobre tu foto real */
+    background-image: linear-gradient(rgba(0, 51, 102, 0.75), rgba(0, 51, 102, 0.75)), url('img/fondo-clinica.jpg');
+    background-size: cover; /* Asegura que la foto cubra todo el espacio */
+    background-position: center; /* Centra la foto */
+    background-attachment: fixed; /* Efecto Parallax elegante (la foto se queda quieta al bajar) */
     
     color: white;
     text-align: center;
-    padding: 150px 20px; /* Aumentamos el padding para hacerla más alta y majestuosa */
+    /* Hacemos la cabecera más alta para que luzca la foto */
+    min-height: 75vh; /* Ocupa el 75% de la altura de la pantalla */
     
-    /* Flexbox para centrar todo el contenido perfectamente */
+    /* Flexbox para centrar el texto y el botón perfectamente en medio de la foto */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 70vh; /* Que ocupe al menos el 70% de la altura de la pantalla */
+    padding: 20px;
 }
 
 .hero h1 {
-    font-size: 3.5rem;
+    font-size: 3.5rem; /* Título gigante */
     margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Sombra para que las letras resalten sobre la foto */
-    max-width: 800px;
-    line-height: 1.2;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7); /* Sombra fuerte para que se lea perfecto sobre la foto */
+    max-width: 900px;
+    line-height: 1.1;
+    font-weight: 800;
 }
 
 .hero p {
-    font-size: 1.5rem;
-    margin-bottom: 40px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    font-size: 1.5rem; /* Subtítulo grande */
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    font-weight: 500;
+}
+
+/* Diseño del Botón "Agendar Evaluación" en la cabecera */
+.hero .btn-whatsapp {
+    display: inline-block;
+    background-color: #00b0eb; /* Celeste Vitalis */
+    color: white;
+    padding: 15px 40px; /* Botón grande y cómodo */
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 176, 235, 0.5);
+    transition: all 0.3s ease;
+    border: 2px solid transparent; /* Para evitar saltos al hacer hover */
+}
+
+.hero .btn-whatsapp:hover {
+    background-color: white;
+    color: #00b0eb; /* Invierte los colores al pasar el mouse */
+    border-color: #00b0eb;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 176, 235, 0.7);
 }
 
 /* Ajustes para celulares */
 @media (max-width: 768px) {
     .hero {
-        padding: 100px 20px;
-        min-height: 50vh;
-        background-attachment: scroll; /* El parallax suele fallar en móviles, mejor desactivarlo */
+        min-height: 60vh; /* Un poco menos alto en celular */
+        background-attachment: scroll; /* Desactivamos parallax en móvil para evitar problemas */
     }
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.2rem; /* Título más pequeño */
     }
     .hero p {
         font-size: 1.2rem;
     }
-}
-/* --- BOTÓN PRINCIPAL DE LA CABECERA (Agendar Evaluación) --- */
-.btn-whatsapp {
-    display: inline-block;
-    background-color: #00b0eb; /* El celeste llamativo de Vitalis */
-    color: white;
-    padding: 15px 35px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 50px; /* Forma de píldora moderna */
-    margin-top: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 176, 235, 0.4); /* Sombra celeste que lo hace brillar */
-}
-
-.btn-whatsapp:hover {
-    background-color: #008cba; /* Un azul un poco más oscuro al pasar el mouse */
-    color: white;
-    transform: translateY(-3px); /* Da un pequeño saltito hacia arriba */
-    box-shadow: 0 8px 25px rgba(0, 176, 235, 0.6);
+    .hero .btn-whatsapp {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
 }
         /* --- SECCIONES GENERALES --- */
         section { padding: 60px 5%; }
