@@ -399,3 +399,41 @@
     font-size: 0.85rem;
     color: #8bbaf0;
 }
+
+/* --- BOTÓN FLOTANTE WHATSAPP --- */
+.btn-flotante-wsp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366; /* Verde oficial de WhatsApp */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Asegura que siempre esté por encima del resto de la página */
+    transition: all 0.3s ease;
+}
+
+.btn-flotante-wsp:hover {
+    background-color: #128c7e; /* Verde más oscuro al pasar el mouse */
+    transform: scale(1.1); /* Efecto de crecimiento */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste sutil para celulares (lo hace un poquito más pequeño) */
+@media (max-width: 768px) {
+    .btn-flotante-wsp {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+    .btn-flotante-wsp svg {
+        width: 28px;
+        height: 28px;
+    }
+}
