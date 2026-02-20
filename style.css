@@ -313,3 +313,89 @@
 .service-card p, .service-card ul {
     padding: 0 20px;
 }
+
+/* --- PIE DE PÁGINA (FOOTER) PROFESIONAL --- */
+.site-footer {
+    background-color: var(--dark-blue, #003366);
+    color: #ffffff;
+    padding: 50px 5% 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria muy sutil */
+}
+
+.footer-section h3 {
+    color: #b3d6fe; /* Tu color celeste para resaltar títulos */
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d1e5ff;
+    margin-bottom: 10px;
+}
+
+/* Lista de enlaces sin viñetas */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #d1e5ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Iconos de Redes Sociales */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background: #b3d6fe; /* Se vuelve celeste al pasar el mouse */
+    color: var(--dark-blue, #003366); /* El icono se vuelve azul oscuro */
+    transform: translateY(-3px); /* Efecto de saltito sutil */
+}
+
+/* Derechos de autor */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.85rem;
+    color: #8bbaf0;
+}
