@@ -18,12 +18,75 @@
         .nav-links a { text-decoration: none; color: var(--text-gray); margin-left: 20px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary); }
 
-        /* --- HERO --- */
-        .hero { background: linear-gradient(135deg, var(--secondary) 0%, var(--white) 100%); padding: 80px 5%; text-align: center; }
-        .hero h1 { color: var(--primary); font-size: 2.8rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
-        .btn-whatsapp { background: #25d366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+        /* --- CABECERA PRINCIPAL (HERO) CON IMAGEN DE FONDO --- */
+.hero {
+    /* AQUÍ PONES LA RUTA DE TU IMAGEN DE FONDO. Asegúrate de tener 'fondo-clinica.jpg' en tu carpeta img */
+    background-image: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('img/fondo-clinica.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto Parallax (la imagen se queda quieta al hacer scroll) */
+    
+    color: white;
+    text-align: center;
+    padding: 150px 20px; /* Aumentamos el padding para hacerla más alta y majestuosa */
+    
+    /* Flexbox para centrar todo el contenido perfectamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* Que ocupe al menos el 70% de la altura de la pantalla */
+}
 
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Sombra para que las letras resalten sobre la foto */
+    max-width: 800px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Ajustes para celulares */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 20px;
+        min-height: 50vh;
+        background-attachment: scroll; /* El parallax suele fallar en móviles, mejor desactivarlo */
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+    }
+}
+/* --- BOTÓN PRINCIPAL DE LA CABECERA (Agendar Evaluación) --- */
+.btn-whatsapp {
+    display: inline-block;
+    background-color: #00b0eb; /* El celeste llamativo de Vitalis */
+    color: white;
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px; /* Forma de píldora moderna */
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 176, 235, 0.4); /* Sombra celeste que lo hace brillar */
+}
+
+.btn-whatsapp:hover {
+    background-color: #008cba; /* Un azul un poco más oscuro al pasar el mouse */
+    color: white;
+    transform: translateY(-3px); /* Da un pequeño saltito hacia arriba */
+    box-shadow: 0 8px 25px rgba(0, 176, 235, 0.6);
+}
         /* --- SECCIONES GENERALES --- */
         section { padding: 60px 5%; }
         .section-title { text-align: center; color: var(--dark-blue); margin-bottom: 40px; font-size: 2rem; }
