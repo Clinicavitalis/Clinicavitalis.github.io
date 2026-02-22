@@ -1,37 +1,91 @@
 :root {
-            --primary: #00b0eb; /* Celeste Vitalis */
-            --secondary: #b3d6fe;
-            --dark-blue: #01579B;
-            --bg-color: #f4faff;
-            --white: #ffffff;
-            --text-gray: #455A64;
-            --success: #66BB6A;
-            --error: #EF5350;
-        }
+    --primary: #00b0eb; /* Celeste Vitalis */
+    --secondary: #b3d6fe;
+    --dark-blue: #01579B;
+    --bg-color: #f4faff;
+    --white: #ffffff;
+    --text-gray: #455A64;
+    --success: #66BB6A;
+    --error: #EF5350;
+}
 
-        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background-color: var(--bg-color); color: var(--text-gray); overflow-x: hidden; }
+body { 
+    font-family: 'Segoe UI', Roboto, sans-serif; 
+    margin: 0; 
+    background-color: var(--bg-color); 
+    color: var(--text-gray); 
+    overflow-x: hidden; 
+}
 
-        /* --- NAVEGACIÓN --- */
-        nav { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        .logo-img { height: 50px; width: auto; } /* Ajuste para tu logo real */
-        .nav-links a { text-decoration: none; color: var(--text-gray); margin-left: 20px; font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+/* =========================================
+   1. NAVEGACIÓN (HEADER & NAV)
+========================================= */
+nav { 
+    background: var(--white); 
+    padding: 15px 5%; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+}
 
-/* --- CABECERA PRINCIPAL (HERO) MEJORADA --- */
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo-img { height: 50px; width: auto; }
+
+.nav-links a { 
+    text-decoration: none; 
+    color: var(--text-gray); 
+    margin-left: 20px; 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    transition: 0.3s; 
+}
+
+.nav-links a:hover { color: var(--primary); }
+
+/* Separadores de menú verticales (Solo Escritorio) */
+@media (min-width: 769px) {
+    .nav-links a {
+        position: relative;
+        padding-left: 15px !important; 
+        padding-right: 15px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .nav-links a:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0; 
+        top: 50%; 
+        transform: translateY(-50%); 
+        height: 16px; 
+        width: 2px; 
+        background-color: #ccc; 
+    }
+}
+
+/* Menú Hamburguesa */
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+/* =========================================
+   2. CABECERA PRINCIPAL (HERO SECTION)
+========================================= */
 .hero {
-    /* El filtro azul oscuro sobre tu foto real */
     background-image: linear-gradient(rgba(0, 51, 102, 0.75), rgba(0, 51, 102, 0.75)), url('img/fondo-clinica.jpg');
-    background-size: cover; /* Asegura que la foto cubra todo el espacio */
-    background-position: center; /* Centra la foto */
-    background-attachment: fixed; /* Efecto Parallax elegante (la foto se queda quieta al bajar) */
-    
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; /* Efecto Parallax */
     color: white;
     text-align: center;
-    /* Hacemos la cabecera más alta para que luzca la foto */
-    min-height: 75vh; /* Ocupa el 75% de la altura de la pantalla */
-    
-    /* Flexbox para centrar el texto y el botón perfectamente en medio de la foto */
+    min-height: 75vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,27 +94,26 @@
 }
 
 .hero h1 {
-    font-size: 3.5rem; /* Título gigante */
+    font-size: 3.5rem; 
     margin-bottom: 20px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.7); /* Sombra fuerte para que se lea perfecto sobre la foto */
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7); 
     max-width: 900px;
     line-height: 1.1;
     font-weight: 800;
 }
 
 .hero p {
-    font-size: 1.5rem; /* Subtítulo grande */
+    font-size: 1.5rem; 
     margin-bottom: 30px;
     text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
     font-weight: 500;
 }
 
-/* Diseño del Botón "Agendar Evaluación" en la cabecera */
 .hero .btn-whatsapp {
     display: inline-block;
-    background-color: #00b0eb; /* Celeste Vitalis */
+    background-color: #00b0eb; 
     color: white;
-    padding: 15px 40px; /* Botón grande y cómodo */
+    padding: 15px 40px; 
     font-size: 1.2rem;
     font-weight: bold;
     text-decoration: none;
@@ -69,252 +122,47 @@
     letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(0, 176, 235, 0.5);
     transition: all 0.3s ease;
-    border: 2px solid transparent; /* Para evitar saltos al hacer hover */
+    border: 2px solid transparent; 
 }
 
 .hero .btn-whatsapp:hover {
     background-color: white;
-    color: #00b0eb; /* Invierte los colores al pasar el mouse */
+    color: #00b0eb; 
     border-color: #00b0eb;
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 176, 235, 0.7);
 }
 
-/* Ajustes para celulares */
-@media (max-width: 768px) {
-    .hero {
-        min-height: 60vh; /* Un poco menos alto en celular */
-        background-attachment: scroll; /* Desactivamos parallax en móvil para evitar problemas */
-    }
-    .hero h1 {
-        font-size: 2.2rem; /* Título más pequeño */
-    }
-    .hero p {
-        font-size: 1.2rem;
-    }
-    .hero .btn-whatsapp {
-        padding: 12px 30px;
-        font-size: 1rem;
-    }
-}
-        /* --- SECCIONES GENERALES --- */
-        section { padding: 60px 5%; }
-        .section-title { text-align: center; color: var(--dark-blue); margin-bottom: 40px; font-size: 2rem; }
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+/* =========================================
+   3. ESTRUCTURA GENERAL DE SECCIONES
+========================================= */
+section { padding: 60px 5%; }
+.section-title { text-align: center; color: var(--dark-blue); margin-bottom: 40px; font-size: 2rem; }
+.grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
-        /* --- SERVICIOS --- */
-        .service-card { background: var(--white); padding: 30px; border-radius: 15px; border-bottom: 4px solid var(--primary); transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .service-card:hover { transform: translateY(-5px); }
-        .service-card h3 { color: var(--primary); margin-top: 0; }
-        .service-card ul { padding-left: 20px; line-height: 1.6; font-size: 0.95rem; }
-
-        /* --- EQUIPO --- */
-        .team-card { background: var(--white); border-radius: 15px; overflow: hidden; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .team-photo { width: 100%; height: 250px; object-fit: contain; background-color: #f4faff; } /* Placeholder gris si no hay foto */
-        .team-info { padding: 20px; }
-        .team-name { color: var(--dark-blue); font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
-        .team-role { color: var(--primary); font-size: 0.9rem; font-weight: 600; }
-
-        /* --- QUIZ STYLES (Tu código original) --- */
-        #quiz-section { background: #e1f5fe; }
-        .game-container { max-width: 500px; margin: 0 auto; background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,176,235, 0.15); }
-        .option-btn { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 10px; border: 2px solid #b3e5fc; background: #f8fdff; cursor: pointer; text-align: left; transition: 0.2s; }
-        .option-btn.correct { background: #e8f5e9; border-color: var(--success); color: #2e7d32; }
-        .option-btn.wrong { background: #ffebee; border-color: var(--error); color: #c62828; }
-        .hidden { display: none !important; }
-        .btn-primary { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; font-size: 1rem; }
-        input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5fc; border-radius: 8px; box-sizing: border-box; }
-
-        @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } }
-/* Agrega esto en tu <style> antes del cierre </style> */
-
-/* Estilo del botón de 3 líneas (oculto en PC, visible en móvil) */
-.hamburger {
-    display: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--primary);
+/* =========================================
+   4. TARJETAS DE ESPECIALIDADES & CARRUSELES
+========================================= */
+.service-card { 
+    background: var(--white); 
+    padding: 30px 30px 20px 30px; /* Ajuste inferior */
+    border-radius: 15px; 
+    border-bottom: 4px solid var(--primary); 
+    transition: transform 0.3s; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
 }
 
-/* Ajustes para Móvil */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Oculto por defecto */
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 100%; /* Justo debajo de la barra blanca */
-        left: 0;
-        background-color: var(--white);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        padding: 20px 0;
-        text-align: center;
-    }
+.service-card:hover { transform: translateY(-5px); }
+.service-card h3 { color: var(--primary); margin-top: 20px; padding: 0 20px; }
+.service-card ul { padding-left: 20px; line-height: 1.6; font-size: 0.95rem; padding: 0 20px; }
 
-    .nav-links.active {
-        display: flex; /* Se muestra al activar */
-    }
-
-    .nav-links a {
-        margin: 15px 0;
-        display: block;
-        font-size: 1.2rem;
-    }
-
-    .hamburger {
-        display: block; /* Mostrar las 3 líneas */
-    }
-
-    .hero h1 { font-size: 2rem; }
-}
-
-/* --- ESTILOS PÁGINA EDUCACIÓN --- */
-
-/* Cuadrícula de Videos */
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.video-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
-
-.video-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Truco para videos Responsive (16:9) */
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
-    height: 0;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.video-info {
-    padding: 20px;
-}
-
-.video-info h4 {
-    color: var(--dark-blue);
-    margin: 0 0 10px 0;
-}
-
-/* Cuadrícula de Noticias */
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.news-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-}
-
-.news-image {
-    height: 180px;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.news-content {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.news-tag {
-    background-color: var(--secondary);
-    color: var(--dark-blue);
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    align-self: flex-start;
-    margin-bottom: 10px;
-}
-
-.news-content h4 {
-    margin: 0 0 10px 0;
-    font-size: 1.2rem;
-    color: var(--text-gray);
-}
-
-.read-more {
-    margin-top: auto; /* Empuja el botón al fondo */
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-/* --- AGREGADO PARA INSTAGRAM --- */
-
-/* Wrapper especial para videos verticales (Reels/TikTok) */
-.video-wrapper.vertical {
-    padding-bottom: 177.77%; /* Relación de aspecto 9:16 (Altura de un celular) */
-}
-
-/* Opcional: Para que el botón de play de Instagram no se corte */
-.instagram-media {
-    min-width: 100% !important;
-    margin: 0 !important;
-}
-
-/* --- SEPARADORES DE MENÚ VERTICALES (Solo Escritorio) --- */
-@media (min-width: 769px) {
-    /* 1. Igualamos los espacios a ambos lados de cada palabra */
-    .nav-links a {
-        position: relative;
-        padding-left: 15px !important; 
-        padding-right: 15px !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-
-    /* 2. Dibujamos la rayita flotante exactamente en el borde derecho */
-    .nav-links a:not(:last-child)::after {
-        content: "";
-        position: absolute;
-        right: 0; /* Lo empuja al límite del espacio derecho */
-        top: 50%; /* Lo baja a la mitad... */
-        transform: translateY(-50%); /* ...y lo centra verticalmente perfecto */
-        height: 16px; /* Altura de la rayita (cámbialo si la quieres más larga o corta) */
-        width: 2px; /* Grosor de la rayita */
-        background-color: #ccc; /* Color celeste */
-    }
-}
-
-/* --- MINI CARRUSELES EN TARJETAS DE ESPECIALIDAD --- */
+/* Mini Carrusel */
 .mini-carousel {
     position: relative;
     width: 100%;
-    height: 400px; /* Puedes cambiar esto si quieres las fotos más altas o bajas */
+    height: 400px; 
     overflow: hidden;
+    margin-bottom: -10px; /* Acorta distancia con el título */
 }
 
 .mini-carousel-track {
@@ -323,242 +171,198 @@
     transition: transform 0.4s ease-in-out;
 }
 
-.mini-carousel-track img,
-.mini-carousel-track video {
+.mini-carousel-track img, .mini-carousel-track video {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* <--- VOLVEMOS A COVER PARA LLENAR EL ANCHO */
-    object-position: top center; /* <--- MAGIA: Evita que se corten las cabezas */
+    object-fit: cover; 
+    object-position: top center; 
     flex-shrink: 0; 
     background-color: #f4faff;
 }
 
-/* --- BOTONES DE NAVEGACIÓN "PRO" --- */
+/* Botones del Carrusel */
 .mini-btn {
     position: absolute;
     top: 50%;
-    /* Centrado vertical perfecto y forma circular */
     transform: translateY(-50%);
-    width: 45px;  /* Ancho fijo */
-    height: 45px; /* Alto igual al ancho para que sea un círculo perfecto */
-    border-radius: 50%; /* Esto hace la magia del círculo */
-    
-    /* Estilo visual */
-    background: rgba(255, 255, 255, 0.85); /* Blanco semitransparente */
+    width: 45px;  
+    height: 45px; 
+    border-radius: 50%; 
+    background: rgba(255, 255, 255, 0.85); 
     border: none;
-    color: var(--dark-blue, #003366); /* Color del icono (tu azul corporativo) */
-    font-size: 1.4rem; /* Icono un poco más grande */
+    color: var(--dark-blue); 
+    font-size: 1.4rem; 
     cursor: pointer;
-    
-    /* Sombra suave para dar profundidad (efecto flotante) */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    
-    /* Flexbox para centrar el icono perfectamente dentro del círculo */
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* Transición suave para el efecto hover */
     transition: all 0.3s ease;
     z-index: 2;
-    padding: 0; /* Quitamos el padding extra */
+    padding: 0; 
 }
 
-/* Efecto al pasar el mouse por encima */
 .mini-btn:hover {
-    background: white; /* Blanco sólido */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada */
-    transform: translateY(-50%) scale(1.05); /* Crece un poquito */
+    background: white; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); 
+    transform: translateY(-50%) scale(1.05); 
 }
 
-/* Posicionamiento */
-.mini-btn.prev { left: 15px; } /* Un poco más separados del borde */
+.mini-btn.prev { left: 15px; } 
 .mini-btn.next { right: 15px; }
 
-/* Ajuste para que el texto no quede pegado a la foto */
-.service-card {
-    padding-bottom: 20px; /* Espacio extra abajo */
-}
-.service-card h3 {
-    margin-top: 20px;
-    padding: 0 20px;
-}
-.service-card p, .service-card ul {
-    padding: 0 20px;
-}
-
-/* --- PIE DE PÁGINA (FOOTER) PROFESIONAL --- */
-.site-footer {
-    background-color: var(--dark-blue, #003366);
-    color: #ffffff;
-    padding: 50px 5% 20px;
-    margin-top: 40px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria muy sutil */
-}
-
-.footer-section h3 {
-    color: #b3d6fe; /* Tu color celeste para resaltar títulos */
-    margin-bottom: 20px;
-    font-size: 1.2rem;
-}
-
-.footer-section p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #d1e5ff;
-    margin-bottom: 10px;
-}
-
-/* Lista de enlaces sin viñetas */
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 12px;
-}
-
-.footer-section ul li a {
-    color: #d1e5ff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-/* Iconos de Redes Sociales */
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.social-icons a {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.social-icons a:hover {
-    background: #b3d6fe; /* Se vuelve celeste al pasar el mouse */
-    color: var(--dark-blue, #003366); /* El icono se vuelve azul oscuro */
-    transform: translateY(-3px); /* Efecto de saltito sutil */
-}
-
-/* Derechos de autor */
-.footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    font-size: 0.85rem;
-    color: #8bbaf0;
-}
-
-/* --- BOTÓN FLOTANTE WHATSAPP --- */
-.btn-flotante-wsp {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25d366; /* Verde oficial de WhatsApp */
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Asegura que siempre esté por encima del resto de la página */
-    transition: all 0.3s ease;
-}
-
-.btn-flotante-wsp:hover {
-    background-color: #128c7e; /* Verde más oscuro al pasar el mouse */
-    transform: scale(1.1); /* Efecto de crecimiento */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Ajuste sutil para celulares (lo hace un poquito más pequeño) */
-@media (max-width: 768px) {
-    .btn-flotante-wsp {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-    }
-    .btn-flotante-wsp svg {
-        width: 28px;
-        height: 28px;
-    }
-}
-
-/* --- TARJETAS DEL EQUIPO MÉDICO --- */
+/* =========================================
+   5. TARJETAS DEL EQUIPO MÉDICO
+========================================= */
 .team-card {
     background: white;
     border-radius: 20px;
-    overflow: hidden; /* Hace que la foto respete los bordes redondos de la tarjeta */
-    box-shadow: 0 10px 25px rgba(0, 51, 102, 0.08); /* Sombra sutil y elegante */
+    overflow: hidden; 
+    box-shadow: 0 10px 25px rgba(0, 51, 102, 0.08); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
-    border: 1px solid #eef4fb; /* Borde muy suave para definirlas */
+    border: 1px solid #eef4fb; 
 }
 
 .team-card:hover {
-    transform: translateY(-8px); /* La tarjeta salta hacia arriba al pasar el mouse */
+    transform: translateY(-8px); 
     box-shadow: 0 15px 35px rgba(0, 51, 102, 0.15);
 }
 
-/* Estilo para las fotos de los doctores */
 .team-photo {
     width: 100%;
-    height: 300px; /* Altura uniforme para todas las fotos */
-    object-fit: cover; /* Centra la cara y recorta los bordes sobrantes automáticamente */
-    border-bottom: 4px solid var(--primary, #00b0eb); /* Línea celeste separadora */
+    height: 300px; 
+    object-fit: cover; 
+    border-bottom: 4px solid var(--primary); 
+    background-color: #f4faff;
 }
 
-/* Estilo para los textos dentro de la tarjeta */
-.team-info {
-    padding: 25px 20px;
-}
+.team-info { padding: 25px 20px; }
 
 .team-name {
     font-size: 1.3rem;
-    color: var(--dark-blue, #003366);
+    color: var(--dark-blue);
     font-weight: 800;
     margin-bottom: 5px;
 }
 
 .team-role {
     font-size: 0.95rem;
-    color: var(--primary, #00b0eb);
+    color: var(--primary);
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 15px;
 }
 
-.team-info p {
-    font-size: 0.9rem;
-    color: #666;
-    line-height: 1.5;
-    margin: 0;
+.team-info p { font-size: 0.9rem; color: #666; line-height: 1.5; margin: 0; }
+
+/* =========================================
+   6. PÁGINA DE EDUCACIÓN & QUIZ (JUEGO)
+========================================= */
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.video-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+.video-card:hover { transform: translateY(-5px); }
+
+.video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background: #000; }
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+.video-wrapper.vertical { padding-bottom: 177.77%; } /* Reels/TikTok */
+.instagram-media { min-width: 100% !important; margin: 0 !important; }
+
+.video-info { padding: 20px; }
+.video-info h4 { color: var(--dark-blue); margin: 0 0 10px 0; }
+
+/* Quiz */
+#quiz-section { background: #e1f5fe; }
+.game-container { max-width: 500px; margin: 0 auto; background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,176,235, 0.15); }
+.option-btn { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 10px; border: 2px solid #b3e5fc; background: #f8fdff; cursor: pointer; text-align: left; transition: 0.2s; }
+.option-btn.correct { background: #e8f5e9; border-color: var(--success); color: #2e7d32; }
+.option-btn.wrong { background: #ffebee; border-color: var(--error); color: #c62828; }
+.hidden { display: none !important; }
+.btn-primary { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 10px; font-size: 1rem; }
+input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5fc; border-radius: 8px; box-sizing: border-box; }
+
+/* =========================================
+   7. PIE DE PÁGINA (FOOTER)
+========================================= */
+.site-footer { background-color: var(--dark-blue); color: #ffffff; padding: 50px 5% 20px; margin-top: 40px; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; padding-bottom: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.footer-section h3 { color: var(--secondary); margin-bottom: 20px; font-size: 1.2rem; }
+.footer-section p { font-size: 0.95rem; line-height: 1.6; color: #d1e5ff; margin-bottom: 10px; }
+.footer-section ul { list-style: none; padding: 0; margin: 0; }
+.footer-section ul li { margin-bottom: 12px; }
+.footer-section ul li a { color: #d1e5ff; text-decoration: none; transition: color 0.3s ease; }
+.footer-section ul li a:hover { color: #ffffff; text-decoration: underline; }
+
+.social-icons { display: flex; gap: 15px; margin-top: 20px; }
+.social-icons a { color: white; background: rgba(255, 255, 255, 0.1); width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; }
+.social-icons a:hover { background: var(--secondary); color: var(--dark-blue); transform: translateY(-3px); }
+.footer-bottom { text-align: center; padding-top: 20px; font-size: 0.85rem; color: #8bbaf0; }
+
+/* =========================================
+   8. BOTÓN FLOTANTE WHATSAPP "PRO" (Con Latido)
+========================================= */
+@keyframes pulso-wsp {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.btn-flotante-wsp {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(45deg, #25d366, #128c7e);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    animation: pulso-wsp 2s infinite;
+}
+
+.btn-flotante-wsp:hover {
+    transform: scale(1.1) translateY(-5px);
+    background: linear-gradient(45deg, #128c7e, #25d366);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+    animation: none;
+}
+
+.btn-flotante-wsp svg { width: 32px; height: 32px; fill: white; }
+
+/* =========================================
+   9. MEDIA QUERIES (AJUSTES PARA CELULARES)
+========================================= */
+@media (max-width: 768px) {
+    /* Menú Móvil */
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        background-color: var(--white);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        text-align: center;
+    }
+    .nav-links.active { display: flex; }
+    .nav-links a { margin: 15px 0; display: block; font-size: 1.2rem; }
+    .hamburger { display: block; }
+    
+    /* Hero Móvil */
+    .hero { min-height: 60vh; background-attachment: scroll; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1.2rem; }
+    .hero .btn-whatsapp { padding: 12px 30px; font-size: 1rem; }
+    
+    /* WhatsApp Móvil */
+    .btn-flotante-wsp { width: 55px; height: 55px; bottom: 20px; right: 20px; }
+    .btn-flotante-wsp svg { width: 28px; height: 28px; }
 }
