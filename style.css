@@ -366,3 +366,9 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5
     .btn-flotante-wsp { width: 55px; height: 55px; bottom: 20px; right: 20px; }
     .btn-flotante-wsp svg { width: 28px; height: 28px; }
 }
+
+/* Esto marcará de celeste y negrita la página en la que estamos */
+.nav-links a.active { 
+    color: var(--primary); 
+    font-weight: bold; 
+}
