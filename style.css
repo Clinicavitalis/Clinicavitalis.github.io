@@ -231,10 +231,10 @@ section { padding: 60px 5%; }
 
 .team-photo {
     width: 100%;
-    height: 300px; 
-    object-fit: cover; 
+    height: 250px; /* Volvemos a tu altura original */
+    object-fit: contain; /* Vuelve a mostrar la foto completa sin recortar */
+    background-color: #f4faff; /* El fondo suave para rellenar los lados */
     border-bottom: 4px solid var(--primary); 
-    background-color: #f4faff;
 }
 
 .team-info { padding: 25px 20px; }
