@@ -272,6 +272,67 @@ section { padding: 60px 5%; }
 .video-info { padding: 20px; }
 .video-info h4 { color: var(--dark-blue); margin: 0 0 10px 0; }
 
+/* --- NOTICIAS VITALIS (RESTAURADO) --- */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.news-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f4faff;
+}
+
+.news-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-tag {
+    background-color: var(--secondary);
+    color: var(--dark-blue);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+.news-content h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+}
+
+.read-more {
+    margin-top: auto; 
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
 /* Quiz */
 #quiz-section { background: #e1f5fe; }
 .game-container { max-width: 500px; margin: 0 auto; background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,176,235, 0.15); }
