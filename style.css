@@ -389,7 +389,7 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 30px;
+    bottom: 110px;
     right: 30px;
     background: linear-gradient(45deg, #25d366, #128c7e);
     color: white;
@@ -440,7 +440,7 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 2px solid #b3e5
     .hero .btn-whatsapp { padding: 12px 30px; font-size: 1rem; }
     
     /* WhatsApp Móvil */
-    .btn-flotante-wsp { width: 55px; height: 55px; bottom: 20px; right: 20px; }
+    .btn-flotante-wsp { width: 55px; height: 55px; bottom: 90px; right: 20px; }
     .btn-flotante-wsp svg { width: 28px; height: 28px; }
 }
 
