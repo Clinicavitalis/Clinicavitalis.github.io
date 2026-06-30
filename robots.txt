@@ -1,0 +1,32 @@
+# robots.txt — Vitalis Clínica Odontológica
+# https://clinicavitalis.cl
+
+# ─── AI Crawlers — Permitir (mejora citabilidad) ───
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: OpenAI
+Allow: /
+
+# ─── Search Engines ───
+User-agent: *
+Allow: /
+Sitemap: https://clinicavitalis.cl/sitemap.xml
+
+# ─── Crawl Delay (para no saturar el servidor) ───
+Crawl-delay: 10
