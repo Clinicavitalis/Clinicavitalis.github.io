@@ -267,6 +267,93 @@
         </svg>
     </a>
 
+<script>
+// ─── Vitalis WhatsApp Widget Inteligente ───
+// Versión 2.0 — Scroll tracking + mensaje contextual + horario + UTM
+(function() {
+  var PHONE = '56957006747';
+  var PAGE_TITLES = {
+    '/': 'agendar una evaluación en Vitalis',
+    '/index.html': 'agendar una evaluación en Vitalis',
+    '/especialidades.html': 'consultar por las especialidades dentales',
+    '/equipo.html': 'conocer al equipo de Vitalis',
+    '/contacto.html': 'contactar con Vitalis',
+    '/educacion.html': 'consultar información educativa',
+    '/juego.html': 'participar en el juego de Vitalis',
+    '/noticia1.html': 'consultar sobre odontopediatría',
+    '/noticia2.html': 'consultar sobre alimentación dental',
+    '/noticia3.html': 'consultar sobre implantes dentales',
+  };
+  var path = window.location.pathname.replace(/\/$/, '') || '/';
+  var contextMsg = PAGE_TITLES[path] || 'agendar una evaluación en Vitalis';
+
+  // ─── Horario de atención ───
+  var now = new Date();
+  var day = now.getDay(); // 0=Dom, 6=Sáb
+  var hour = now.getHours();
+  var isOpen = false;
+  if (day >= 1 && day <= 5 && hour >= 9 && hour < 20) isOpen = true; // Lun-Vie 9-20
+  if (day === 6 && hour >= 9 && hour < 15) isOpen = true; // Sáb 9-15
+
+  // ─── Mejorar botón flotante ───
+  var waBtn = document.querySelector('.btn-flotante-wsp');
+  if (waBtn) {
+    var utm = '?utm_source=whatsapp&utm_medium=floating_button&utm_campaign=vitalis_web';
+    var statusEmoji = isOpen ? '🟢' : '🔴';
+    var statusText = isOpen ? 'Disponible ahora' : 'Fuera de horario (Urgencias 24/7)';
+    var msg = encodeURIComponent('Hola, me gustaría ' + contextMsg + '.');
+
+    // Cambiar href a dinámico con UTM + contexto
+    waBtn.href = 'https://wa.me/' + PHONE + '?text=' + msg + '&' + utm.replace('?', '');
+
+    // Tooltip con horario
+    waBtn.setAttribute('title', statusText);
+
+    // Indicador visual de disponibilidad
+    var statusDot = document.createElement('span');
+    statusDot.style.cssText = 'position:absolute;top:-2px;right:-2px;width:14px;height:14px;border-radius:50%;' +
+      'background:' + (isOpen ? '#00e676' : '#ff5252') + ';border:2px solid white;box-shadow:0 0 6px ' + (isOpen ? 'rgba(0,230,118,0.6)' : 'rgba(255,82,82,0.6)') + ';';
+    waBtn.style.position = 'relative';
+    waBtn.appendChild(statusDot);
+
+    // ─── Scroll depth tracking ───
+    var scrolledEnough = false;
+    var scrollHandler = function() {
+      var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPct > 0.3 && !scrolledEnough) {
+        scrolledEnough = true;
+        // Se podría trackear vía Google Analytics si se desea
+        if (typeof gtag === 'function') {
+          gtag('event', 'whatsapp_scroll_depth', {
+            'scroll_pct': Math.round(scrollPct * 100),
+            'page': path
+          });
+        }
+      }
+    };
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+
+    // ─── Click tracking mejorado ───
+    waBtn.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'whatsapp_click', {
+          'page': path,
+          'context': contextMsg,
+          'scroll_depth': scrolledEnough ? '>30%' : '<30%',
+          'is_open_hours': isOpen
+        });
+      }
+      // También enviar al dashboard API si está disponible
+      fetch('https://clinicavitalis.cl/api/whatsapp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page: path, button: 'flotante' }),
+        keepalive: true
+      }).catch(function(){});
+    });
+  }
+})();
+</script>
 <script src="//code.tidio.co/mug7zflcfsxtlwcjdubjiinnwzwvscyd.js" async></script>
 </body>
 </html>
