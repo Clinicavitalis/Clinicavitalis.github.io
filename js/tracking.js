@@ -38,31 +38,39 @@
     }
   }
 
+  function sendVital(name, value, rating) {
+    sendBeacon(API_BASE + "/api/vitals", {
+      name: name,
+      value: Math.round(value * 100) / 100,
+      rating: rating || "good",
+      page: getPath(),
+      device: getDevice(),
+      connection: navigator.connection && navigator.connection.effectiveType
+        ? navigator.connection.effectiveType
+        : "unknown",
+    });
+  }
+
   // ─── Web Vitals (via PerformanceObserver) ─────────────────────────────────
 
   if (window.PerformanceObserver) {
-    var vitalsSent = {};
+    // CLS — Cumulative Layout Shift (accumulates throughout the page lifetime)
+    var clsValue = 0;
+    var clsFinalized = false;
 
-    function sendVital(name, value, rating) {
-      var page = getPath();
-      var key = name + "|" + page;
-      // Avoid sending the same metric twice for the same page
-      if (vitalsSent[key]) return;
-      vitalsSent[key] = true;
-
-      sendBeacon(API_BASE + "/api/vitals", {
-        name: name,
-        value: Math.round(value * 100) / 100,
-        rating: rating || "good",
-        page: page,
-        device: getDevice(),
-        connection: navigator.connection && navigator.connection.effectiveType
-          ? navigator.connection.effectiveType
-          : "unknown",
+    try {
+      var clsObs = new PerformanceObserver(function (list) {
+        var entries = list.getEntries();
+        for (var i = 0; i < entries.length; i++) {
+          if (!entries[i].hadRecentInput) {
+            clsValue += entries[i].value;
+          }
+        }
       });
-    }
+      clsObs.observe({ type: "layout-shift", buffered: true });
+    } catch (e) {}
 
-    // LCP — Largest Contentful Paint
+    // LCP — Largest Contentful Paint (can update as images load, so we keep the latest)
     try {
       var lcpObs = new PerformanceObserver(function (list) {
         var entries = list.getEntries();
@@ -74,7 +82,7 @@
       lcpObs.observe({ type: "largest-contentful-paint", buffered: true });
     } catch (e) {}
 
-    // INP / FID — Interaction to Next Paint / First Input Delay
+    // INP / FID — First Input Delay
     try {
       var inpObs = new PerformanceObserver(function (list) {
         var entries = list.getEntries();
@@ -87,22 +95,7 @@
       inpObs.observe({ type: "first-input", buffered: true });
     } catch (e) {}
 
-    // CLS — Cumulative Layout Shift
-    try {
-      var clsValue = 0;
-      var clsObs = new PerformanceObserver(function (list) {
-        var entries = list.getEntries();
-        for (var i = 0; i < entries.length; i++) {
-          if (!entries[i].hadRecentInput) {
-            clsValue += entries[i].value;
-          }
-        }
-        sendVital("CLS", clsValue, clsValue < 0.1 ? "good" : clsValue < 0.25 ? "needs-improvement" : "poor");
-      });
-      clsObs.observe({ type: "layout-shift", buffered: true });
-    } catch (e) {}
-
-    // FCP — First Contentful Paint
+    // FCP — First Contentful Paint (fires once)
     try {
       var fcpObs = new PerformanceObserver(function (list) {
         var entries = list.getEntries();
@@ -115,7 +108,7 @@
     } catch (e) {}
   }
 
-  // TTFB — Time to First Byte (via Navigation Timing API)
+  // TTFB — Time to First Byte (via Navigation Timing API — fires once)
   if (window.performance && performance.getEntriesByType) {
     var navEntries = performance.getEntriesByType("navigation");
     if (navEntries.length > 0) {
@@ -123,6 +116,32 @@
       var ttfb = nav.responseStart - nav.requestStart;
       sendVital("TTFB", ttfb, ttfb < 800 ? "good" : ttfb < 1800 ? "needs-improvement" : "poor");
     }
+  }
+
+  // ─── Flush CLS on page unload ─────────────────────────────────────────────
+  // CLS is cumulative, so we must report the FINAL value when the user leaves.
+  // Using sendBeacon guarantees the request completes even during page unload.
+
+  function flushCLS() {
+    if (clsFinalized) return;
+    clsFinalized = true;
+
+    if (clsValue > 0) {
+      sendVital("CLS", clsValue, clsValue < 0.1 ? "good" : clsValue < 0.25 ? "needs-improvement" : "poor");
+    }
+  }
+
+  // pagehide fires on mobile Safari and modern browsers during navigation/close
+  if (window.addEventListener) {
+    window.addEventListener("pagehide", flushCLS);
+    // visibilitychange to "hidden" catches desktop browser tab closes
+    window.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") {
+        flushCLS();
+      }
+    });
+    // beforeunload as fallback for older browsers
+    window.addEventListener("beforeunload", flushCLS);
   }
 
   // ─── Phone Click Tracking ─────────────────────────────────────────────────
